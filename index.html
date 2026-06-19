@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="黎昕彤的个人作品集，涵盖交互设计、产品设计、视觉设计、信息可视化、机械制作、空间装置与 AIGC 视觉实验。"
+      content="黎昕彤的综合设计作品集，涵盖交互、产品、三维、视觉、信息设计、机械制作、空间装置与 AIGC 实验。"
     />
     <meta name="theme-color" content="#ffffff" />
     <title>PORTFOLIO｜黎昕彤</title>
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="/src/styles.css" />
     <script type="module" src="/src/app.js"></script>
   </head>
@@ -34,8 +35,8 @@
       </button>
 
       <nav id="primary-navigation" class="site-nav" aria-label="主导航" data-nav>
-        <a href="#projects">Work</a>
         <a href="#about">Profile</a>
+        <a href="#projects">Work</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -43,44 +44,68 @@
     <main id="main">
       <section id="top" class="hero" aria-labelledby="hero-title">
         <div class="hero__meta">
-          <span>DESIGN ARCHIVE</span>
+          <span>PERSONAL DESIGN ARCHIVE</span>
           <span>GUANGZHOU · CHINA</span>
         </div>
 
-        <div class="hero__title">
-          <h1 id="hero-title">PORTFOLIO</h1>
-          <span class="pixel-mark" aria-hidden="true"></span>
-        </div>
-
-        <div class="hero__profile">
+        <div id="about" class="hero__profile">
           <div class="hero__identity">
             <p class="eyebrow">黎昕彤 / Li Xintong</p>
-            <h2>智能交互设计学生，关注产品、交互、视觉与 AI 辅助创作。</h2>
+            <h2>智能交互设计学生。</h2>
             <p class="hero__summary">
-              我从真实问题出发，把研究、系统、物件与视觉表达组织成清晰、可落地的设计方案。
+              我从真实问题出发，在用户研究、信息结构、产品造型和视觉表达之间建立联系，把想法推进到可使用、可展示的设计结果。
             </p>
             <a class="arrow-link" href="#projects">
-              查看精选项目
+              进入项目展厅
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h13M13 6l6 6-6 6" />
               </svg>
             </a>
           </div>
 
-          <dl class="profile-facts">
-            <div>
-              <dt>EDUCATION</dt>
-              <dd>广州美术学院<br />智能交互设计本科在读</dd>
-            </div>
-            <div>
-              <dt>LOCATION</dt>
-              <dd>广州，中国</dd>
-            </div>
-            <div>
-              <dt>PRACTICE</dt>
-              <dd>产品设计 · 交互设计<br />视觉设计 · 实体制作</dd>
-            </div>
-          </dl>
+          <figure class="profile-portrait">
+            <img
+              src="/media/projects/portrait.webp"
+              alt="黎昕彤个人照片"
+              width="600"
+              height="800"
+            />
+            <figcaption>
+              <span>PROFILE / 2026</span>
+              <span>广州</span>
+            </figcaption>
+          </figure>
+
+          <div class="profile-record">
+            <dl class="profile-facts">
+              <div>
+                <dt>EDUCATION</dt>
+                <dd>广州美术学院<br />智能交互设计 · 2024—2028</dd>
+              </div>
+              <div>
+                <dt>FOCUS</dt>
+                <dd>产品 · 交互 · 视觉 · AI 辅助创作</dd>
+              </div>
+              <div>
+                <dt>TOOLS</dt>
+                <dd>Illustrator · Rhino · KeyShot · ComfyUI · Codex</dd>
+              </div>
+              <div>
+                <dt>EXPERIENCE</dt>
+                <dd>艺术团策划部 · 班级心理委员 · 三等奖学金</dd>
+              </div>
+              <div>
+                <dt>LANGUAGE</dt>
+                <dd>英语 CET-4 · 粤语</dd>
+              </div>
+              <div>
+                <dt>CONTACT</dt>
+                <dd>
+                  <a href="mailto:3414887923@qq.com">3414887923@qq.com</a>
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
 
         <div class="capability-strip" aria-label="设计能力">
@@ -91,79 +116,64 @@
           <span>建模渲染</span>
           <span>实体制作</span>
         </div>
+
+        <div class="hero__title">
+          <h1 id="hero-title">PORTFOLIO</h1>
+          <p>08 PROJECTS<br />2024—2026</p>
+          <span class="pixel-mark" aria-hidden="true"></span>
+        </div>
       </section>
 
       <section id="projects" class="projects-section" aria-labelledby="projects-title">
         <div class="section-heading">
           <div>
-            <p class="section-index">01 / SELECTED WORK</p>
-            <h2 id="projects-title">精选项目</h2>
+            <p class="section-index">01 / PROJECT ARCHIVE</p>
+            <h2 id="projects-title">项目展厅</h2>
           </div>
           <p class="section-note">
-            07 个跨媒介项目，按问题、方法与结果组织。没有真实素材的项目暂以排版呈现。
+            从左侧选择项目，右侧查看完整介绍、彩色原图和过程视频。一次只聚焦一个项目。
           </p>
         </div>
-        <div class="project-list" data-project-list></div>
-      </section>
 
-      <section id="about" class="about-section" aria-labelledby="about-title">
-        <div class="section-heading">
-          <div>
-            <p class="section-index">02 / PROFILE</p>
-            <h2 id="about-title">个人档案</h2>
-          </div>
-        </div>
-
-        <div class="about-grid">
-          <p class="about-lead">
-            设计不是给结果加一层外观，而是把复杂问题重新整理成可以理解、使用和继续发展的结构。
-          </p>
-
-          <div class="about-copy">
-            <p>
-              我目前就读于广州美术学院智能交互设计专业。项目覆盖校园服务系统、小家电产品、文化视觉、信息可视化、机械原型、空间装置与 AIGC 商业实验。
-            </p>
-            <p>
-              面对不同媒介，我关注同一件事：问题是否被说清楚，人与系统的关系是否成立，最后的表达是否准确。
-            </p>
-          </div>
-
-          <dl class="about-list">
-            <div>
-              <dt>NAME</dt>
-              <dd>黎昕彤 / Li Xintong</dd>
-            </div>
-            <div>
-              <dt>FOCUS</dt>
-              <dd>产品 · 交互 · 视觉 · AI 辅助创作</dd>
-            </div>
-            <div>
-              <dt>TOOLS & METHODS</dt>
-              <dd>研究 · 信息架构 · 建模渲染 · 原型制作</dd>
-            </div>
-          </dl>
+        <div class="project-explorer">
+          <div
+            class="project-selector"
+            role="tablist"
+            aria-label="选择项目"
+            data-project-selector
+          ></div>
+          <div class="project-stage" data-project-stage></div>
         </div>
       </section>
     </main>
 
     <footer id="contact" class="site-footer">
       <div>
-        <p class="section-index">03 / CONTACT</p>
+        <p class="section-index">02 / CONTACT</p>
         <h2>保持联系</h2>
       </div>
 
-      <a
-        class="contact-link"
-        href="https://github.com/LiiiZnCu"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <span>GITHUB</span>
-        <strong>@LiiiZnCu</strong>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5 19 19 5M8 5h11v11" />
-        </svg>
-      </a>
+      <div class="contact-list">
+        <a class="contact-link" href="mailto:3414887923@qq.com">
+          <span>EMAIL</span>
+          <strong>3414887923@qq.com</strong>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 19 19 5M8 5h11v11" />
+          </svg>
+        </a>
+        <a
+          class="contact-link"
+          href="https://github.com/LiiiZnCu"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>GITHUB</span>
+          <strong>@LiiiZnCu</strong>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 19 19 5M8 5h11v11" />
+          </svg>
+        </a>
+      </div>
 
       <div class="site-footer__base">
         <span>黎昕彤 / LI XINTONG</span>
