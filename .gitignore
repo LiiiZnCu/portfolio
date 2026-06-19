@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.DS_Store
+.venv/
+.qa-*.png
+作品集整理/
