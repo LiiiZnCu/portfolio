@@ -1,3 +1,11 @@
+function resolveAssetPath(path = "") {
+  if (!path || /^(?:[a-z]+:)?\/\//i.test(path) || path.startsWith("data:")) {
+    return path;
+  }
+
+  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+}
+
 function createMedia(media, className = "") {
   if (media.type === "video") {
     return `
@@ -6,10 +14,10 @@ function createMedia(media, className = "") {
         controls
         playsinline
         preload="metadata"
-        poster="${media.poster ?? ""}"
+        poster="${resolveAssetPath(media.poster)}"
         aria-label="${media.alt}"
       >
-        <source src="${media.src}" type="video/mp4" />
+        <source src="${resolveAssetPath(media.src)}" type="video/mp4" />
         你的浏览器暂不支持视频播放。
       </video>
     `;
@@ -18,7 +26,7 @@ function createMedia(media, className = "") {
   return `
     <img
       class="${className}"
-      src="${media.src}"
+      src="${resolveAssetPath(media.src)}"
       alt="${media.alt}"
       loading="eager"
       decoding="async"

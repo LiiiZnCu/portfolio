@@ -153,3 +153,9 @@ test("页面具备基础可访问性", () => {
 test("页面声明空图标，避免浏览器请求不存在的 favicon", () => {
   assert.match(html, /rel="icon"\s+href="data:,"/);
 });
+
+test("部署在 GitHub Pages 子目录时使用站点基础路径加载媒体", () => {
+  assert.doesNotMatch(html, /src="\/media\//);
+  assert.match(explorer, /import\.meta\.env\.BASE_URL/);
+  assert.match(explorer, /resolveAssetPath/);
+});

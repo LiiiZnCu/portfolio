@@ -26,6 +26,8 @@ pnpm build
 
 推送到 `main` 分支后，GitHub Actions 自动部署。仓库首次使用时，需要在 Settings → Pages 中将 Source 设为 GitHub Actions。
 
+媒体地址统一通过 Vite 的站点基础路径生成，保证部署在 `https://liiizncu.github.io/portfolio/` 子目录时图片与视频正常加载。
+
 ## 已完成功能
 
 - 首屏先展示姓名、身份、彩色个人照片和核心资料，更多经历可展开查看。
