@@ -159,3 +159,37 @@ test("部署在 GitHub Pages 子目录时使用站点基础路径加载媒体", 
   assert.match(explorer, /import\.meta\.env\.BASE_URL/);
   assert.match(explorer, /resolveAssetPath/);
 });
+
+test("项目图片按原始比例自适应，不使用固定比例框或图片边框", () => {
+  assert.match(css, /\.project-media\s*\{[^}]*height:\s*auto;/s);
+  assert.match(
+    css,
+    /\.project-figure__media\s*\{[^}]*background:\s*transparent;/s,
+  );
+  assert.doesNotMatch(css, /\.project-figure__media\[data-ratio=/);
+  assert.doesNotMatch(css, /aspect-ratio:/);
+  assert.doesNotMatch(css, /\.project-figure figcaption\s*\{[^}]*border-top:/s);
+});
+
+test("主要项目补齐不重复的成果媒体", () => {
+  const expectedMediaCounts = new Map([
+    ["SportLoop", 4],
+    ["VERSA", 5],
+    ["一袭戏服，一种人生", 4],
+    ["控制理论与结构原理", 5],
+  ]);
+
+  for (const [title, expectedCount] of expectedMediaCounts) {
+    const project = projectData.find((item) => item.title === title);
+    assert.equal(
+      1 + project.gallery.length,
+      expectedCount,
+      `${title} 成果媒体不完整`,
+    );
+  }
+
+  assert.doesNotMatch(
+    projects,
+    /src:\s*"\/media\/projects\/(?:sportloop|versa)\.webp"/,
+  );
+});

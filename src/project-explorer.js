@@ -30,7 +30,6 @@ function createMedia(media, className = "") {
       alt="${media.alt}"
       loading="eager"
       decoding="async"
-      data-fit="${media.fit ?? "cover"}"
     />
   `;
 }
@@ -38,7 +37,7 @@ function createMedia(media, className = "") {
 function createFigure(media, className = "") {
   return `
     <figure class="project-figure ${className}">
-      <div class="project-figure__media" data-ratio="${media.ratio ?? "landscape"}">
+      <div class="project-figure__media">
         ${createMedia(media, "project-media")}
       </div>
       <figcaption>${media.caption}</figcaption>

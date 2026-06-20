@@ -10,11 +10,9 @@ export const projects = [
     facts: ["双端网页系统", "用户研究 / 信息架构 / 原型", "校园公共服务"],
     heroMedia: {
       type: "image",
-      src: "/media/projects/sportloop.webp",
-      alt: "SportLoop 学生端、管理员端与体育器材主视觉",
-      caption: "学生端与管理端围绕同一套器材状态协同工作",
-      fit: "contain",
-      ratio: "wide",
+      src: "/media/projects/sportloop/student-home.webp",
+      alt: "SportLoop 学生端首页",
+      caption: "学生端首页：借用状态、场馆信息与核心操作入口",
     },
     sections: {
       problem:
@@ -68,19 +66,21 @@ export const projects = [
     gallery: [
       {
         type: "image",
-        src: "/media/projects/sportloop/student-home.webp",
-        alt: "SportLoop 学生端首页",
-        caption: "学生端：首页聚合库存、快捷借用和常用器材",
-        fit: "contain",
-        ratio: "wide",
+        src: "/media/projects/sportloop/equipment-list.webp",
+        alt: "SportLoop 器材列表",
+        caption: "器材列表：按类别浏览并查看可借状态",
+      },
+      {
+        type: "image",
+        src: "/media/projects/sportloop/equipment-detail.webp",
+        alt: "SportLoop 器材详情与借用时长选择",
+        caption: "器材详情：借用规则、时长选择与 NFC 入库状态",
       },
       {
         type: "image",
         src: "/media/projects/sportloop/admin-dashboard.webp",
         alt: "SportLoop 管理员工作台",
         caption: "管理端：集中处理库存、任务和维护状态",
-        fit: "contain",
-        ratio: "wide",
       },
     ],
   },
@@ -95,11 +95,9 @@ export const projects = [
     facts: ["产品结构与制造", "Rhino / KeyShot / CMF", "小组课程项目"],
     heroMedia: {
       type: "image",
-      src: "/media/projects/versa.webp",
-      alt: "VERSA 多功能可视化智能空气炸锅",
-      caption: "整机与分体状态：上部热风模块、透明玻璃内胆与底部加热底座",
-      fit: "contain",
-      ratio: "landscape",
+      src: "/media/projects/versa/product-closed.webp",
+      alt: "VERSA 多功能可视化智能空气炸锅分体状态",
+      caption: "整机模块：上部热风模块、透明玻璃内胆与底部加热底座",
     },
     sections: {
       problem:
@@ -156,16 +154,25 @@ export const projects = [
         src: "/media/projects/versa/product-open.webp",
         alt: "VERSA 打开状态",
         caption: "透明内胆与分体使用方式",
-        fit: "cover",
-        ratio: "landscape",
+      },
+      {
+        type: "image",
+        src: "/media/projects/versa/exploded-view.webp",
+        alt: "VERSA 产品结构爆炸渲染",
+        caption: "结构爆炸渲染：热风、显示、加热与玻璃内胆组件",
+      },
+      {
+        type: "image",
+        src: "/media/projects/versa/material-glass.webp",
+        alt: "VERSA 高硼硅玻璃内胆材质细节",
+        caption: "材料细节：可观察、可拆洗的高硼硅玻璃内胆",
       },
       {
         type: "video",
         src: "/media/projects/versa/process.mp4",
-        poster: "/media/projects/versa.webp",
+        poster: "/media/projects/versa/product-closed.webp",
         alt: "VERSA 空气炸锅使用演示视频",
         caption: "使用演示；倒水与沸腾片段使用 AI 辅助生成",
-        ratio: "wide",
       },
     ],
   },
@@ -280,11 +287,21 @@ export const projects = [
     gallery: [
       {
         type: "image",
+        src: "/media/projects/opera-tarot/card-layout.webp",
+        alt: "中国戏曲元素塔罗牌卡面与包装陈列",
+        caption: "卡面系统：人物牌、卡背与包装形成统一视觉",
+      },
+      {
+        type: "image",
+        src: "/media/projects/opera-tarot/detail-board.webp",
+        alt: "中国戏曲元素塔罗牌完整系列实物排布",
+        caption: "系列实物：不同人物与牌义在完整卡组中的关系",
+      },
+      {
+        type: "image",
         src: "/media/projects/opera-tarot/packaging.webp",
         alt: "中国戏曲元素塔罗牌包装",
         caption: "卡盒与系列包装",
-        fit: "cover",
-        ratio: "wide",
       },
     ],
   },
@@ -416,11 +433,27 @@ export const projects = [
     gallery: [
       {
         type: "image",
+        src: "/media/projects/mechanical/track-detail.webp",
+        alt: "智能施工物流轨道机构细节",
+        caption: "轨道机构：桥梁、传送与感应装置的实体组合",
+      },
+      {
+        type: "image",
+        src: "/media/projects/mechanical/robot-model.webp",
+        alt: "三叶轮爬楼梯机器人实体模型",
+        caption: "机器人整机：3D 打印框架与四组三叶轮",
+      },
+      {
+        type: "image",
+        src: "/media/projects/mechanical/gear-detail.webp",
+        alt: "爬楼梯机器人齿轮传动细节",
+        caption: "传动细节：电机、齿轮组与轮轴连接",
+      },
+      {
+        type: "image",
         src: "/media/projects/mechanical/robot-on-stairs.webp",
         alt: "爬楼梯机器人在台阶上测试",
         caption: "三叶轮机器人在实体台阶上的攀爬结果",
-        fit: "cover",
-        ratio: "wide",
       },
     ],
   },

@@ -497,52 +497,25 @@ svg {
 }
 
 .project-figure__media {
-  display: grid;
+  display: block;
   min-height: 0;
-  overflow: hidden;
-  place-items: center;
-  background: var(--surface);
+  overflow: visible;
+  background: transparent;
 }
 
 .project-media {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   min-height: 0;
   border: 0;
-  object-fit: cover;
-}
-
-.project-media[data-fit="contain"] {
-  object-fit: contain;
 }
 
 .project-figure figcaption {
-  padding-top: 0.7rem;
-  border-top: 1px solid var(--ink);
+  padding-top: 0.6rem;
   color: var(--ink-soft);
   font-size: 0.69rem;
   line-height: 1.5;
-}
-
-.project-figure__media[data-ratio="wide"] {
-  aspect-ratio: 16 / 9;
-}
-
-.project-figure__media[data-ratio="landscape"] {
-  aspect-ratio: 4 / 3;
-}
-
-.project-figure__media[data-ratio="square"] {
-  aspect-ratio: 1;
-}
-
-.project-figure__media[data-ratio="portrait"] {
-  aspect-ratio: 4 / 5;
-}
-
-.project-figure__media[data-ratio="poster"] {
-  aspect-ratio: 2 / 3;
 }
 
 .project-media-viewer {
@@ -552,10 +525,9 @@ svg {
 .media-pagination {
   display: grid;
   grid-template-columns: 3rem 1fr 3rem;
+  gap: 0.5rem;
   align-items: center;
-  margin-top: 0.5rem;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  margin-top: 0.75rem;
 }
 
 .media-pagination button {
@@ -566,14 +538,6 @@ svg {
   background: transparent;
   font-size: 1.1rem;
   cursor: pointer;
-}
-
-.media-pagination button:last-child {
-  border-left: 1px solid var(--line);
-}
-
-.media-pagination button:first-child {
-  border-right: 1px solid var(--line);
 }
 
 .media-pagination button:hover,
@@ -728,10 +692,6 @@ svg {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem;
   margin-top: clamp(3rem, 6vw, 6rem);
-}
-
-.result-item__figure .project-figure__media {
-  aspect-ratio: 4 / 3;
 }
 
 .result-item > span {
@@ -1088,16 +1048,6 @@ svg {
 
   .profile-facts > div {
     grid-template-columns: 5.5rem 1fr;
-  }
-
-  .project-lead__figure .project-figure__media,
-  .result-item__figure .project-figure__media {
-    aspect-ratio: 4 / 3;
-  }
-
-  .process-block__figure .project-figure__media {
-    aspect-ratio: auto;
-    min-height: 14rem;
   }
 
   .site-footer__base {
