@@ -18,8 +18,8 @@
 
     <header class="site-header">
       <a class="brand" href="#top" aria-label="返回首页顶部">
-        <span>LXT</span>
-        <span>PORTFOLIO / 2026</span>
+        <span>PORTFOLIO</span>
+        <span>LXT / 2026</span>
       </a>
 
       <button
@@ -44,19 +44,20 @@
     <main id="main">
       <section id="top" class="hero" aria-labelledby="hero-title">
         <div class="hero__meta">
-          <span>PERSONAL DESIGN ARCHIVE</span>
+          <span>LI XINTONG / DESIGN ARCHIVE</span>
           <span>GUANGZHOU · CHINA</span>
         </div>
 
         <div id="about" class="hero__profile">
           <div class="hero__identity">
-            <p class="eyebrow">黎昕彤 / Li Xintong</p>
-            <h2>智能交互设计学生。</h2>
+            <p class="eyebrow">PROFILE / 2026</p>
+            <h1 id="hero-title">黎昕彤 <span>Li Xintong</span></h1>
+            <p class="hero__role">智能交互设计学生。</p>
             <p class="hero__summary">
-              我从真实问题出发，在用户研究、信息结构、产品造型和视觉表达之间建立联系，把想法推进到可使用、可展示的设计结果。
+              关注产品、交互与视觉表达，从真实问题出发，把研究和想法推进为可使用、可展示的设计方案。
             </p>
             <a class="arrow-link" href="#projects">
-              进入项目展厅
+              查看项目
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h13M13 6l6 6-6 6" />
               </svg>
@@ -71,72 +72,79 @@
               height="800"
             />
             <figcaption>
-              <span>PROFILE / 2026</span>
-              <span>广州</span>
+              <span>GUANGZHOU</span>
+              <span>01 / PORTRAIT</span>
             </figcaption>
           </figure>
 
-          <div class="profile-record">
-            <dl class="profile-facts">
-              <div>
-                <dt>EDUCATION</dt>
-                <dd>广州美术学院<br />智能交互设计 · 2024—2028</dd>
-              </div>
-              <div>
-                <dt>FOCUS</dt>
-                <dd>产品 · 交互 · 视觉 · AI 辅助创作</dd>
-              </div>
-              <div>
-                <dt>TOOLS</dt>
-                <dd>Illustrator · Rhino · KeyShot · ComfyUI · Codex</dd>
-              </div>
-              <div>
-                <dt>EXPERIENCE</dt>
-                <dd>艺术团策划部 · 班级心理委员 · 三等奖学金</dd>
-              </div>
-              <div>
-                <dt>LANGUAGE</dt>
-                <dd>英语 CET-4 · 粤语</dd>
-              </div>
-              <div>
-                <dt>CONTACT</dt>
-                <dd>
-                  <a href="mailto:3414887923@qq.com">3414887923@qq.com</a>
-                </dd>
-              </div>
-            </dl>
+          <dl class="profile-facts">
+            <div>
+              <dt>EDUCATION</dt>
+              <dd>广州美术学院<br />智能交互设计 · 2024—2028</dd>
+            </div>
+            <div>
+              <dt>FOCUS</dt>
+              <dd>产品 · 交互 · 视觉 · AI 辅助创作</dd>
+            </div>
+            <div>
+              <dt>CONTACT</dt>
+              <dd><a href="mailto:3414887923@qq.com">3414887923@qq.com</a></dd>
+            </div>
+          </dl>
+        </div>
+
+        <details class="profile-details" data-profile-details>
+          <summary>
+            <span>MORE PROFILE</span>
+            <span>展开个人档案</span>
+          </summary>
+          <div class="profile-details__grid">
+            <div>
+              <span>CAPABILITIES</span>
+              <p>用户研究 · 信息架构 · 产品结构 · 视觉转译 · 建模渲染 · 实体制作</p>
+            </div>
+            <div>
+              <span>TOOLS</span>
+              <p>Illustrator · Rhino · KeyShot · ComfyUI · Codex</p>
+            </div>
+            <div>
+              <span>EXPERIENCE</span>
+              <p>艺术团策划部 · 班级心理委员 · 三等奖学金</p>
+            </div>
+            <div>
+              <span>LANGUAGE</span>
+              <p>英语 CET-4 · 粤语</p>
+            </div>
           </div>
-        </div>
-
-        <div class="capability-strip" aria-label="设计能力">
-          <span>用户研究</span>
-          <span>信息架构</span>
-          <span>产品结构</span>
-          <span>视觉转译</span>
-          <span>建模渲染</span>
-          <span>实体制作</span>
-        </div>
-
-        <div class="hero__title">
-          <h1 id="hero-title">PORTFOLIO</h1>
-          <p>08 PROJECTS<br />2024—2026</p>
-          <span class="pixel-mark" aria-hidden="true"></span>
-        </div>
+        </details>
       </section>
 
       <section id="projects" class="projects-section" aria-labelledby="projects-title">
         <div class="section-heading">
           <div>
-            <p class="section-index">01 / PROJECT ARCHIVE</p>
-            <h2 id="projects-title">项目展厅</h2>
+            <p class="section-index">01 / SELECTED WORK</p>
+            <h2 id="projects-title">项目档案</h2>
           </div>
           <p class="section-note">
-            从左侧选择项目，右侧查看完整介绍、彩色原图和过程视频。一次只聚焦一个项目。
+            08 个跨媒介项目。选择项目后，按问题、过程、方案与结果阅读。
           </p>
         </div>
 
+        <button
+          class="project-menu-button"
+          type="button"
+          aria-expanded="false"
+          aria-controls="project-selector"
+          data-project-menu-button
+        >
+          <span>选择项目</span>
+          <strong data-current-project-label>01 / SportLoop</strong>
+          <span aria-hidden="true">＋</span>
+        </button>
+
         <div class="project-explorer">
           <div
+            id="project-selector"
             class="project-selector"
             role="tablist"
             aria-label="选择项目"

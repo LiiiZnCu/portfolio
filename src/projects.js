@@ -5,49 +5,82 @@ export const projects = [
     title: "SportLoop",
     subtitle: "校园体育器材借用与维护体验系统",
     category: "交互设计",
-    overview:
-      "从校园器材借用“跑空”、人工登记低效和损耗反馈无门出发，设计学生端与管理员端协同的借用维护系统。项目不只记录库存数量，而是把查询、预约、扫码借还、异常反馈、维修和盘点连接成持续更新的器材状态。",
-    challenge:
-      "学生需要在到场前知道器材是否可借，校队需要批量预约，管理员则需要追踪借出、逾期、损坏和维修状态。原有线下流程的信息断点，让等待、追责和维护都变得被动。",
-    response:
-      "以“一物一码”为基础建立双端信息架构：学生端聚焦查找、预约、借还与报损，管理端聚合核销、库存、工单和预警。状态在借用与维护环节同步更新，减少坏器材被再次借出。",
-    highlights: [
-      "学生端与管理员端双端协同",
-      "库存、质量与维修状态可视化",
-      "扫码借还、批量预约与异常反馈",
-      "报修—派单—维修—验收闭环",
-    ],
-    labels: ["SYSTEM", "SERVICE", "USER FLOW", "PROTOTYPE"],
+    summary:
+      "面向学生、校队和管理员的双端系统，把器材查询、借还、报损与维护连接成持续更新的状态闭环。",
+    facts: ["双端网页系统", "用户研究 / 信息架构 / 原型", "校园公共服务"],
+    heroMedia: {
+      type: "image",
+      src: "/media/projects/sportloop.webp",
+      alt: "SportLoop 学生端、管理员端与体育器材主视觉",
+      caption: "学生端与管理端围绕同一套器材状态协同工作",
+      fit: "contain",
+      ratio: "wide",
+    },
+    sections: {
+      problem:
+        "校园器材借用存在三个相互关联的问题：普通学生容易到场后才发现器材被借空，校队批量借用需要逐件登记，管理员依赖纸质台账处理库存与损耗。项目目标因此不是增加一个预约入口，而是让使用状态、异常反馈和维护记录在整个借用周期中持续可见。",
+      process: [
+        {
+          title: "三类用户，三种压力",
+          text:
+            "访谈与实地观察把用户分为临时借用的学生、需要批量预约的球队负责人，以及负责盘点和维护的管理员。三类人的任务不同，但都受到信息不同步影响，这决定了系统必须同时设计学生端和管理端。",
+          media: {
+            type: "image",
+            src: "/media/projects/sportloop/research-users.webp",
+            alt: "SportLoop 普通学生、校队负责人和管理员三类用户画像",
+            caption: "用户研究：临时借用、批量预约和库存维护对应三种不同压力",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+        {
+          title: "从借出记录到维护闭环",
+          text:
+            "信息架构以“一物一码”为基础，把器材档案、库存状态、扫码借还、报修、盘点和预警串成同一条路径。学生端负责查询与反馈，管理端负责核销、派单和更新状态。",
+          media: {
+            type: "image",
+            src: "/media/projects/sportloop/information-architecture.webp",
+            alt: "SportLoop 体育器材借用与维护信息架构",
+            caption: "信息架构：建档识别 → 状态查询 → 借还 → 报修 → 盘点 → 预警",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+        {
+          title: "让异常在归还时被看见",
+          text:
+            "核心任务流程覆盖运动前查询、到场扫码、使用、归还检测、异常同步和维护处理。坏器材一旦被反馈便进入维护状态，避免再次被借出。",
+          media: {
+            type: "image",
+            src: "/media/projects/sportloop/task-flow.webp",
+            alt: "SportLoop 核心任务流程",
+            caption: "学生、系统和管理员在六个阶段中的状态交接",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+      ],
+      solution:
+        "最终方案提供库存与质量状态、预约和扫码借还、批量器材申请、归还前检测、快速报修和管理端工单。学生端以白底与酒红强调主要操作；管理端使用深色工作台集中展示库存、任务和维护信息。",
+      outcome:
+        "项目完成了学生端、管理员端、关键状态与核心交互原型，并建立从借用可感知、异常可反馈到维护可追踪的服务逻辑。",
+    },
     gallery: [
-      {
-        type: "image",
-        src: "/media/projects/sportloop.webp",
-        alt: "SportLoop 学生端、管理员端与体育器材主视觉",
-        caption: "双端系统与校园器材使用场景",
-      },
       {
         type: "image",
         src: "/media/projects/sportloop/student-home.webp",
         alt: "SportLoop 学生端首页",
-        caption: "学生端：首页聚合库存、快捷借用与常用器材",
-      },
-      {
-        type: "image",
-        src: "/media/projects/sportloop/equipment-list.webp",
-        alt: "SportLoop 器材列表页面",
-        caption: "按分类、状态与关键词查找器材",
-      },
-      {
-        type: "image",
-        src: "/media/projects/sportloop/equipment-detail.webp",
-        alt: "SportLoop 器材详情与借用页面",
-        caption: "器材详情、可借状态与借用入口",
+        caption: "学生端：首页聚合库存、快捷借用和常用器材",
+        fit: "contain",
+        ratio: "wide",
       },
       {
         type: "image",
         src: "/media/projects/sportloop/admin-dashboard.webp",
         alt: "SportLoop 管理员工作台",
-        caption: "管理员端：库存、任务与维护信息集中处理",
+        caption: "管理端：集中处理库存、任务和维护状态",
+        fit: "contain",
+        ratio: "wide",
       },
     ],
   },
@@ -57,49 +90,74 @@ export const projects = [
     title: "VERSA",
     subtitle: "多功能可视化智能空气炸锅设计",
     category: "产品设计",
-    overview:
-      "VERSA 取意于 versatile，面向独居青年的一人食场景，将空气炸、炖煮与煎烤能力整合进一套可视化烹饪系统。设计从传统空气炸锅功能单一、过程不可见、参数依赖经验和清洁不便等问题展开。",
-    challenge:
-      "不透明炸篮让用户只能靠时间和经验判断熟度，频繁抽出查看会损失热量；单一加热方式又提高了闲置率。产品还需要兼顾台面占用、拆洗效率、材质安全和操作门槛。",
-    response:
-      "通过顶部热风循环与底部持续加热形成双模式结构，以透明高硼硅玻璃内胆提供全过程观察。旋钮、TFT 屏幕、语音提示和 AI 食谱建议共同降低参数设置负担，分体结构便于直接上桌、收纳与清洁。",
-    highlights: [
-      "空气炸、炖煮与煎烤多模式融合",
-      "透明玻璃内胆与上下加热结构",
-      "旋钮、屏幕、语音与食谱辅助",
-      "整机建模、结构爆炸与 CMF 方案",
-    ],
-    labels: ["OBJECT", "STRUCTURE", "CMF", "INTERACTION"],
+    summary:
+      "为一人食场景设计的多功能烹饪系统，把空气炸、炖煮与煎烤整合进可观察、可拆洗的产品结构。",
+    facts: ["产品结构与制造", "Rhino / KeyShot / CMF", "小组课程项目"],
+    heroMedia: {
+      type: "image",
+      src: "/media/projects/versa.webp",
+      alt: "VERSA 多功能可视化智能空气炸锅",
+      caption: "整机与分体状态：上部热风模块、透明玻璃内胆与底部加热底座",
+      fit: "contain",
+      ratio: "landscape",
+    },
+    sections: {
+      problem:
+        "传统空气炸锅常见功能单一、烹饪过程不可视、参数依赖经验和清洁不便等问题。对独居用户而言，产品还需要减少占用空间和配件数量，并能同时支持快速空气炸与日常煮炖。",
+      process: [
+        {
+          title: "从准备到收纳的用户旅程",
+          text:
+            "用户旅程把体验拆成准备、备菜、使用和收拾四个阶段。食材处理负担、烹饪过程不可见、参数判断困难和清洁繁琐是负面情绪最集中的节点，因此可视内胆、易清洁与低门槛控制被设为核心需求。",
+          media: {
+            type: "image",
+            src: "/media/projects/versa/user-journey.webp",
+            alt: "VERSA 空气炸锅用户旅程图",
+            caption: "用户旅程：观察各阶段的行为、触点、情绪和机会点",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+        {
+          title: "一套结构，两种加热方式",
+          text:
+            "顶部发热管与风机负责高速热风循环，底部陶瓷加热结构负责持续煎煮。透明高硼硅玻璃内胆既提供烹饪观察窗口，也可以拆下直接上桌和清洗。",
+          media: {
+            type: "image",
+            src: "/media/projects/versa/structure-system.webp",
+            alt: "VERSA 产品爆炸图与 CMF",
+            caption: "结构与 CMF：发热、风机、显示、玻璃内胆、隔热和底部加热组件",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+        {
+          title: "旋钮控制两种模式",
+          text:
+            "空炸和电煮共享旋钮与屏幕反馈，但保留不同的参数逻辑。旋转用于查看或调节，短按暂停与恢复，长按取消；语音提示和食谱建议作为辅助层降低设置负担。",
+          media: {
+            type: "image",
+            src: "/media/projects/versa/interaction-flow.webp",
+            alt: "VERSA 空炸模式交互流程",
+            caption: "空炸模式的选择、调整、暂停和完成流程",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+      ],
+      solution:
+        "产品以紧凑的上下模块形成 Air Fry、Simmer、Sear 三类烹饪能力，采用旋钮、TFT 屏幕、语音提醒和食谱辅助。CMF 使用浅灰白外壳、烟茶色玻璃、深灰硅胶和金属结构，强调耐用、可观察和易清洁。",
+      outcome:
+        "项目完成用户研究、结构原理、交互流程、整机建模、结构爆炸、CMF 和使用演示。倒水与沸腾视频片段使用 AI 辅助生成，并在页面中明确标注。",
+    },
     gallery: [
       {
         type: "image",
-        src: "/media/projects/versa.webp",
-        alt: "VERSA 多功能可视化智能空气炸锅渲染图",
-        caption: "整机与分体状态",
-      },
-      {
-        type: "image",
         src: "/media/projects/versa/product-open.webp",
-        alt: "VERSA 空气炸锅打开状态渲染",
+        alt: "VERSA 打开状态",
         caption: "透明内胆与分体使用方式",
-      },
-      {
-        type: "image",
-        src: "/media/projects/versa/product-closed.webp",
-        alt: "VERSA 空气炸锅闭合状态渲染",
-        caption: "闭合状态与台面尺度",
-      },
-      {
-        type: "image",
-        src: "/media/projects/versa/exploded-view.webp",
-        alt: "VERSA 空气炸锅结构爆炸图",
-        caption: "顶部热风、底部加热与内胆结构",
-      },
-      {
-        type: "image",
-        src: "/media/projects/versa/material-glass.webp",
-        alt: "VERSA 玻璃内胆材质展示",
-        caption: "烟茶色高硼硅玻璃材质方案",
+        fit: "cover",
+        ratio: "landscape",
       },
       {
         type: "video",
@@ -107,6 +165,7 @@ export const projects = [
         poster: "/media/projects/versa.webp",
         alt: "VERSA 空气炸锅使用演示视频",
         caption: "使用演示；倒水与沸腾片段使用 AI 辅助生成",
+        ratio: "wide",
       },
     ],
   },
@@ -116,44 +175,41 @@ export const projects = [
     title: "弧刃",
     subtitle: "小刀三维建模与场景渲染练习",
     category: "三维设计",
-    overview:
-      "以弧形刀身与连续握柄为造型核心，完成从基础曲面、零件比例到材质灯光的三维练习。项目通过工作室静物与岩石环境两组场景，比较产品在干净展示和叙事氛围中的视觉表现。",
-    challenge:
-      "小尺寸产品的形态变化集中在轮廓、刃面和握持转折，轻微的比例偏差都会削弱整体力量感；金属、木质与粗粝环境也需要建立清楚的材质区分。",
-    response:
-      "先以轮廓控制整体张力，再细化刃面、握柄和连接关系。渲染阶段分别使用中性棚拍光和低角度环境光，让金属反射、边缘高光与岩石纹理共同强化弧形语言。",
-    highlights: [
-      "弧形轮廓与握持比例推敲",
-      "金属、木质与岩石材质对比",
-      "工作室与环境化双场景渲染",
-    ],
-    labels: ["MODELING", "MATERIAL", "LIGHTING", "RENDER"],
-    gallery: [
-      {
-        type: "image",
-        src: "/media/projects/arc-blade.webp",
-        alt: "弧刃小刀三维建模与岩石场景渲染",
-        caption: "产品造型与环境渲染组合",
-      },
-      {
-        type: "image",
-        src: "/media/projects/arc-blade/rock-scene.webp",
-        alt: "弧刃小刀岩石场景渲染",
-        caption: "岩石环境中的材质与边缘光",
-      },
-      {
-        type: "image",
-        src: "/media/projects/arc-blade/detail.webp",
-        alt: "弧刃小刀材质细节渲染",
-        caption: "刀身、握柄与连接细节",
-      },
-      {
-        type: "image",
-        src: "/media/projects/arc-blade/studio.webp",
-        alt: "弧刃小刀工作室静物渲染",
-        caption: "中性背景下的完整轮廓",
-      },
-    ],
+    summary:
+      "围绕弧形轮廓、金属刃面和握柄转折，练习产品曲面、材质、灯光与环境叙事。",
+    facts: ["三维建模与渲染", "产品造型练习", "材质 / 灯光 / 场景"],
+    heroMedia: {
+      type: "image",
+      src: "/media/projects/arc-blade/studio.webp",
+      alt: "弧刃小刀岩石场景渲染",
+      caption: "低角度环境光突出弧形轮廓、金属反射与握柄转折",
+      fit: "cover",
+      ratio: "wide",
+    },
+    sections: {
+      problem:
+        "小尺寸刀具的视觉张力主要来自轮廓、刃面比例和握持转折，细微偏差都会让造型显得笨重或失去方向感。练习目标是用一条连续弧线统一刀身和握柄，并让材质与环境强化而不是遮盖形态。",
+      process: [
+        {
+          title: "从轮廓到材质",
+          text:
+            "先控制整体弧线和厚度，再细化刃面、握柄及连接关系。材质阶段比较金属高光、深色握柄和粗粝岩石的差异，使产品边缘在低照度场景中仍然清楚。",
+          media: {
+            type: "image",
+            src: "/media/projects/arc-blade/rock-scene.webp",
+            alt: "弧刃小刀材质细节",
+            caption: "平放视角用于检查刃面、握柄、指环和整体比例",
+            fit: "cover",
+            ratio: "wide",
+          },
+        },
+      ],
+      solution:
+        "最终使用两套光线：中性棚拍用于确认比例和轮廓，低角度环境光用于突出金属反射与岩石纹理。产品始终保持弧形主线，不依赖复杂装饰。",
+      outcome:
+        "完成产品建模、材质调整与工作室/环境化两组渲染，形成从形态验证到氛围表达的完整练习。",
+    },
+    gallery: [],
   },
   {
     id: "opera-tarot",
@@ -161,56 +217,74 @@ export const projects = [
     title: "一袭戏服，一种人生",
     subtitle: "中国戏曲元素塔罗牌设计",
     category: "视觉设计",
-    overview:
-      "把戏曲人物、戏服、手持道具与西方塔罗的象征系统重新对应，探索跨文化视觉叙事。大阿卡那对应人物命运与性格，小阿卡那吸收戏曲道具和动作，最终形成卡面、卡背与包装的统一系列。",
-    challenge:
-      "项目既要保留戏曲角色的身份辨识，又要让牌面具备塔罗所需的象征关系；大量卡牌还要求边框、色彩、像素精度与包装结构能够稳定扩展。",
-    response:
-      "先梳理角色与牌义的映射，再用 ComfyUI 辅助建立人物参考，经过手绘重构完成最终卡面。暗红、金色、蓝绿色与像素语言贯穿人物、边框、卡背和盒装，使传统戏曲形成当代收藏物的视觉秩序。",
-    highlights: [
-      "戏曲人物、道具与塔罗牌义映射",
-      "AI 参考生成与手绘重构结合",
-      "像素卡面、卡背和包装系统",
-      "从线稿到完成稿的过程记录",
-    ],
-    labels: ["VISUAL", "CULTURE", "PIXEL", "PROCESS"],
+    summary:
+      "把戏曲人物、戏服与道具映射到塔罗牌义，形成像素卡面、卡背和包装系统。",
+    facts: ["文化视觉设计", "ComfyUI 参考 / 手绘重构", "卡牌与包装"],
+    heroMedia: {
+      type: "image",
+      src: "/media/projects/opera-tarot/cards-spread.webp",
+      alt: "中国戏曲元素塔罗牌卡牌展开",
+      caption: "戏曲人物、动作和象征元素被组织为统一卡牌系列",
+      fit: "cover",
+      ratio: "wide",
+    },
+    sections: {
+      problem:
+        "项目需要同时保留戏曲角色的身份辨识与塔罗牌的象征关系。大量卡牌还要求人物、边框、色彩、像素精度和包装能够遵循统一规则，而不是每张牌各自成立。",
+      process: [
+        {
+          title: "从文化映射到人物语言",
+          text:
+            "大阿卡那用于承载人物命运和性格，小阿卡那吸收戏曲手持道具和动作，宫廷牌以不同人物身份建立层级。PPT 中保留的戏曲原型、人物参考与卡面样例，说明视觉语言如何从舞台形象逐步转向像素卡牌。",
+          media: {
+            type: "image",
+            src: "/media/projects/opera-tarot/reference-mapping.webp",
+            alt: "戏曲原型、人物参考与塔罗卡面样例对照",
+            caption: "过程对照：戏曲原型、人物参考与卡面重构的三层视觉素材",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+        {
+          title: "把参考收束为统一规则",
+          text:
+            "卡背的天体装饰、像素化山水和统一边框被拆成可复用模块。暗红、金色与蓝绿色贯穿卡面、卡背和盒装，避免每张牌各自发展成不同风格。",
+          media: {
+            type: "image",
+            src: "/media/projects/opera-tarot/border-system.webp",
+            alt: "塔罗牌卡背参考、像素图形与边框规则",
+            caption: "系统构成：卡背参考、像素图形和统一边框",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+        {
+          title: "AI 参考之后重新绘制",
+          text:
+            "ComfyUI 用于探索人物姿态和服饰参考，之后重新手绘轮廓、像素细节、边框和象征元素。制作视频记录了角色从线稿到完成稿的变化。",
+          media: {
+            type: "video",
+            src: "/media/tarot-process.mp4",
+            poster: "/media/tarot-process-poster.png",
+            alt: "中国戏曲元素塔罗牌制作过程视频",
+            caption: "角色从线稿到完成稿的制作过程",
+            ratio: "wide",
+          },
+        },
+      ],
+      solution:
+        "最终视觉系统以黑底、暗红与金色建立戏台氛围，像素语言将传统人物转译为当代收藏卡。卡面、卡背和包装使用同一套边框、标题和装饰规则。",
+      outcome:
+        "完成多张人物牌、卡背、卡盒和展示场景，并记录角色从参考、线稿到完成稿的制作过程。",
+    },
     gallery: [
-      {
-        type: "image",
-        src: "/media/projects/opera-tarot.webp",
-        alt: "中国戏曲元素塔罗牌与包装展示",
-        caption: "完整卡组、卡盒与展示场景",
-      },
-      {
-        type: "image",
-        src: "/media/projects/opera-tarot/cards-spread.webp",
-        alt: "中国戏曲元素塔罗牌卡牌展开",
-        caption: "人物牌与象征元素展开",
-      },
       {
         type: "image",
         src: "/media/projects/opera-tarot/packaging.webp",
         alt: "中国戏曲元素塔罗牌包装",
         caption: "卡盒与系列包装",
-      },
-      {
-        type: "image",
-        src: "/media/projects/opera-tarot/card-layout.webp",
-        alt: "中国戏曲元素塔罗牌版式展示",
-        caption: "卡面、卡背与边框规则",
-      },
-      {
-        type: "image",
-        src: "/media/projects/opera-tarot/process-board.webp",
-        alt: "中国戏曲元素塔罗牌过程展板",
-        caption: "角色参考与绘制过程",
-      },
-      {
-        type: "video",
-        src: "/media/tarot-process.mp4",
-        poster: "/media/tarot-process-poster.png",
-        alt: "中国戏曲元素塔罗牌制作过程视频",
-        caption: "角色从线稿到完成稿的制作过程",
+        fit: "cover",
+        ratio: "wide",
       },
     ],
   },
@@ -220,36 +294,56 @@ export const projects = [
     title: "从凝视到亲吻",
     subtitle: "2022 年阿根廷队凝聚力信息可视化",
     category: "信息设计",
-    overview:
-      "以 2022 年阿根廷队为观察对象，把“凝聚力”这一抽象感受拆解为战术结构、跑动覆盖、球员联系与共同庆祝等可阅读线索。两张长幅展板从赛场凝视推进到夺冠亲吻，形成连续叙事。",
-    challenge:
-      "凝聚力难以被单一指标直接说明，比赛数据、人物关系和情绪瞬间又属于不同信息层级。项目需要在保留足球节奏的同时，避免图表与叙事互相争抢。",
-    response:
-      "以比赛进程建立阅读主线，将阵型、传递、跑动与人物节点分层编码，再用蓝白国家色、金色冠军线索和红色强调建立视觉路径，让数据证据与情绪高潮在双展板中逐步汇合。",
-    highlights: [
-      "抽象团队关系转译为多层信息",
-      "战术、跑动与人物叙事并置",
-      "双展板连续阅读结构",
-    ],
-    labels: ["DATA", "RELATION", "TACTICS", "EDITORIAL"],
+    summary:
+      "把抽象的团队凝聚力拆解为战术结构、跑动覆盖、球员联系和情绪节点，形成连续双展板。",
+    facts: ["信息可视化", "足球数据与叙事", "双展板"],
+    heroMedia: {
+      type: "image",
+      src: "/media/projects/argentina/system-path.webp",
+      alt: "阿根廷队凝聚力战术系统拆解",
+      caption: "把凝聚力拆解为可观察的任务、承接、推进与覆盖模块",
+      fit: "contain",
+      ratio: "portrait",
+    },
+    sections: {
+      problem:
+        "凝聚力无法由单一指标直接说明，比赛数据、球员关系和情绪瞬间又属于不同信息层级。项目需要找到一条能让数据证据和叙事情绪共同推进的阅读路径。",
+      process: [
+        {
+          title: "用位置、连线和节奏编码关系",
+          text:
+            "以比赛进程作为主线，把阵型、传递、跑动覆盖和人物节点分层编码。蓝白用于建立国家队身份，金色标记冠军线索，红色只强调关键情绪和关系变化。",
+          media: {
+            type: "image",
+            src: "/media/projects/argentina/information-encoding.webp",
+            alt: "阿根廷队信息可视化编码局部",
+            caption: "信息编码：球员任务、空间位置与团队输出的关系",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+      ],
+      solution:
+        "双展板采用连续叙事而非独立海报：第一部分建立球队结构和联系，第二部分让协作、庆祝与夺冠时刻逐步汇合。图表、人物与文字共享同一条视觉路径。",
+      outcome:
+        "项目最终形成连续双展板。网页不直接堆放整张展板，而是拆出中场热区、角色关系、协同对照和比赛趋势等局部，让结论仍能在屏幕上被清楚阅读。",
+    },
     gallery: [
       {
         type: "image",
-        src: "/media/projects/argentina-data.webp",
-        alt: "从凝视到亲吻阿根廷队信息可视化双展板",
-        caption: "双展板完整叙事",
+        src: "/media/projects/argentina/team-structure.webp",
+        alt: "阿根廷队中场热区与角色分工图",
+        caption: "结果局部：中场热区、角色分工与结构化协同",
+        fit: "contain",
+        ratio: "square",
       },
       {
         type: "image",
-        src: "/media/projects/argentina/board-one.webp",
-        alt: "从凝视到亲吻信息可视化第一张展板",
-        caption: "第一部分：结构、联系与赛场凝视",
-      },
-      {
-        type: "image",
-        src: "/media/projects/argentina/board-two.webp",
-        alt: "从凝视到亲吻信息可视化第二张展板",
-        caption: "第二部分：协作推进与夺冠时刻",
+        src: "/media/projects/argentina/comparison-evidence.webp",
+        alt: "阿根廷队协同对照与比赛趋势图",
+        caption: "结果局部：功能对照、球员关系和比赛趋势共同验证结论",
+        fit: "contain",
+        ratio: "portrait",
       },
     ],
   },
@@ -259,61 +353,74 @@ export const projects = [
     title: "控制理论与结构原理",
     subtitle: "智能施工物流轨道 / 爬楼梯机器人",
     category: "机械制作",
-    overview:
-      "课程项目由两部分组成：一套模拟智能工地物流的循环轨道，以及一台以三叶轮和齿轮传动完成楼梯攀爬的机器人。设计从感应、运动机构、实体制作到反复测试，建立对控制与结构关系的直观理解。",
-    challenge:
-      "轨道需要让红外小车在无人干预下完成照明、分流、桥梁、传送和入库等连续动作；爬楼机器人则要在不用履带和跳跃的条件下，解决抓地、重心、动力与台阶尺度的配合。",
-    response:
-      "轨道以瓦楞纸和雪弗板搭建智能施工物流场景，通过舵机、电机、灯带和传感装置触发连续机构。机器人从仿生抓附出发，把圆轮改为带齿三叶轮，并以一驱四动齿轮组配合 3D 打印框架完成攀爬。",
-    highlights: [
-      "循环轨道与多组感应运动机构",
-      "智能施工物流主题场景",
-      "三叶轮抓地与一驱四动齿轮结构",
-      "草模、测试、调整与 3D 打印成型",
-    ],
-    labels: ["MECHANISM", "TRACK", "FABRICATION", "TESTING"],
+    summary:
+      "用循环轨道和三叶轮爬楼机器人理解传感、运动机构、动力与实体测试之间的关系。",
+    facts: ["控制与结构课程", "实体模型 / 3D 打印", "传感与机械结构"],
+    heroMedia: {
+      type: "image",
+      src: "/media/projects/mechanical/track-overview.webp",
+      alt: "智能施工物流小车轨道全景",
+      caption: "模拟现代工地内部物流的循环轨道",
+      fit: "cover",
+      ratio: "wide",
+    },
+    sections: {
+      problem:
+        "轨道需要让红外小车在无人干预下连续触发照明、分流、桥梁、传送和入库等机构；爬楼机器人则要在不用履带和跳跃的条件下，协调抓地、重心、动力与台阶尺度。",
+      process: [
+        {
+          title: "先用草图安排路线与机构",
+          text:
+            "轨道草图同时规划小车路线、装置位置和触发顺序。智能施工物流主题把各机构对应为夜间照明、货物分流、塔桥限行、传送带和仓库闸门。",
+          media: {
+            type: "image",
+            src: "/media/projects/mechanical/design-sketch.webp",
+            alt: "智能小车轨道设计草图",
+            caption: "轨道路径、感应装置和运动机构的初步推演",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+        {
+          title: "实体制作暴露结构问题",
+          text:
+            "瓦楞纸与雪弗板用于快速搭建，测试中不断调整桥梁、支架、传送和传感位置，直到小车能完成多个装置的连续循环。",
+          media: {
+            type: "image",
+            src: "/media/projects/mechanical/process-track.webp",
+            alt: "智能小车轨道模型制作过程",
+            caption: "从设计、搭建、调整到循环测试的四个阶段",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+        {
+          title: "三叶轮抓住台阶边缘",
+          text:
+            "爬楼车从多足生物的抓附动作获得灵感，把圆轮改为带齿三叶轮。电机驱动主齿轮，通过多组齿轮实现一驱四动；3D 打印框架保证结构精度。",
+          media: {
+            type: "image",
+            src: "/media/projects/mechanical/robot-structure.webp",
+            alt: "爬楼梯机器人结构说明",
+            caption: "主体框架、齿轮传动和三叶轮抓地结构",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+      ],
+      solution:
+        "两个课题都以“先假设、再制作、靠测试修正”为方法。轨道把传感与机构隐藏在场景中，机器人则通过齿轮、三叶轮和重心配合完成台阶攀爬。",
+      outcome:
+        "最终小车能够循环通过多组感应机构；爬楼机器人完成小模型验证和 3D 打印大模型，并在真实台阶上完成攀爬。",
+    },
     gallery: [
-      {
-        type: "image",
-        src: "/media/projects/mechanical.webp",
-        alt: "智能小车轨道和爬楼梯机器人实体原型",
-        caption: "两个课程课题的实体成果",
-      },
-      {
-        type: "image",
-        src: "/media/projects/mechanical/track-overview.webp",
-        alt: "智能施工物流小车轨道全景",
-        caption: "循环轨道全景",
-      },
-      {
-        type: "image",
-        src: "/media/projects/mechanical/track-detail.webp",
-        alt: "智能施工物流轨道结构细节",
-        caption: "桥梁、传送与分流机构细节",
-      },
-      {
-        type: "image",
-        src: "/media/projects/mechanical/build-process.webp",
-        alt: "智能小车轨道制作过程",
-        caption: "瓦楞纸结构搭建与测试",
-      },
-      {
-        type: "image",
-        src: "/media/projects/mechanical/robot-model.webp",
-        alt: "爬楼梯机器人模型",
-        caption: "三叶轮机器人整机",
-      },
       {
         type: "image",
         src: "/media/projects/mechanical/robot-on-stairs.webp",
         alt: "爬楼梯机器人在台阶上测试",
-        caption: "实体台阶攀爬场景",
-      },
-      {
-        type: "image",
-        src: "/media/projects/mechanical/gear-detail.webp",
-        alt: "爬楼梯机器人齿轮传动细节",
-        caption: "一驱四动齿轮传动细节",
+        caption: "三叶轮机器人在实体台阶上的攀爬结果",
+        fit: "cover",
+        ratio: "wide",
       },
     ],
   },
@@ -323,36 +430,48 @@ export const projects = [
     title: "生长中的记忆",
     subtitle: "记忆主题空间装置",
     category: "空间装置",
-    overview:
-      "以照片、花材、镜面、石块和灯带构成一处可以靠近观看的记忆场景。材料像从地面向上生长，旧照片被光线重新照亮；日间与夜间两种状态，让同一组个人片段在真实与想象之间切换。",
-    challenge:
-      "私人记忆容易停留在直接陈列，空间装置需要让观看者通过距离、反射、遮挡和光线主动建立联系，同时保持材料之间的轻重与疏密节奏。",
-    response:
-      "以石块稳定底部，以枝条和花材向上延展，照片穿插在不同高度；镜面把局部空间和观看者带入作品，暖色灯带在暗环境中串联碎片，使记忆从静态物件变成持续生长的现场。",
-    highlights: [
-      "照片、花材、镜面与石块混合媒介",
-      "观看距离与反射关系设计",
-      "日间和亮灯双重空间状态",
-    ],
-    labels: ["SPACE", "MATERIAL", "MEMORY", "LIGHT"],
+    summary:
+      "照片、花材、镜面、石块与灯带共同构成一处在日间和夜间发生变化的记忆场景。",
+    facts: ["空间装置", "混合媒介", "材料与灯光"],
+    heroMedia: {
+      type: "image",
+      src: "/media/projects/memory/day.webp",
+      alt: "生长中的记忆日间状态",
+      caption: "日间状态：照片、枝条、花材和镜面的材料关系",
+      fit: "cover",
+      ratio: "portrait",
+    },
+    sections: {
+      problem:
+        "私人照片如果只是平面陈列，很难让观看者产生主动联系。装置需要借助距离、遮挡、反射和光线，让记忆既保持个人性，又成为可以靠近、绕行和重新观看的空间。",
+      process: [
+        {
+          title: "用轻重材料建立生长方向",
+          text:
+            "石块稳定底部，枝条和花材向上延展，照片穿插在不同高度。镜面把局部空间和观看者带进作品，使记忆不再只属于照片中的过去。",
+          media: {
+            type: "image",
+            src: "/media/projects/memory/material-detail.webp",
+            alt: "生长中的记忆材料细节",
+            caption: "自然光下观察照片、花材、石块与镜面的层次",
+            fit: "cover",
+            ratio: "landscape",
+          },
+        },
+      ],
+      solution:
+        "暖色灯带在暗环境中串联分散的照片和花材，日间强调材料与真实空间，夜间强调反射、轮廓和情绪。两种状态共同构成作品，而不是同一画面的明暗版本。",
+      outcome:
+        "完成一件可近距离观看的混合媒介装置，并记录自然光与亮灯两种展示状态。",
+    },
     gallery: [
       {
         type: "image",
-        src: "/media/projects/memory-installation.webp",
-        alt: "生长中的记忆空间装置亮灯状态",
-        caption: "装置整体与暖光状态",
-      },
-      {
-        type: "image",
-        src: "/media/projects/memory/day.webp",
-        alt: "生长中的记忆空间装置日间状态",
-        caption: "日间：材料、照片与反射关系",
-      },
-      {
-        type: "image",
         src: "/media/projects/memory/night.webp",
-        alt: "生长中的记忆空间装置夜间状态",
-        caption: "夜间：灯带串联记忆碎片",
+        alt: "生长中的记忆亮灯状态",
+        caption: "夜间状态：暖光把记忆碎片重新连接",
+        fit: "cover",
+        ratio: "portrait",
       },
     ],
   },
@@ -362,36 +481,40 @@ export const projects = [
     title: "英美松皮炎湿疹海报",
     subtitle: "AIGC 视觉实验",
     category: "视觉实验",
-    overview:
-      "围绕同一款皮炎湿疹产品，分别建立写实商业广告与像素游戏两条视觉路线。实验关注的不是单张生成结果，而是如何让产品卖点、使用情境、字体和画面风格形成一致的传播语气。",
-    challenge:
-      "医疗护理产品需要清楚、可信和可阅读，但生成图像容易只追求视觉奇观。两条路线既要显著区分，又必须让产品主体、功能暗示与信息层级保持稳定。",
-    response:
-      "写实方案以皮肤状态、自然材料和产品质感建立可信度；像素方案把不适与修护转译为游戏关卡和状态变化。通过后期版式整理，把生成素材收束为可比较的成组海报。",
-    highlights: [
-      "同一产品的双视觉路线对照",
-      "写实广告与像素游戏语法",
-      "生成素材筛选与后期版式整合",
-    ],
-    labels: ["AIGC", "POSTER", "ART DIRECTION", "LAYOUT"],
+    summary:
+      "同一护理产品分别采用写实广告和像素游戏两种视觉语言，比较生成素材如何被转译为商业海报。",
+    facts: ["AIGC 海报", "双视觉路线", "生成与后期版式"],
+    heroMedia: {
+      type: "image",
+      src: "/media/projects/aigc/realistic-poster.webp",
+      alt: "英美松皮炎湿疹写实广告海报",
+      caption: "写实路线：用自然材料、皮肤情境和产品质感建立可信度",
+      fit: "contain",
+      ratio: "poster",
+    },
+    sections: {
+      problem:
+        "护理产品需要清楚、可信和可阅读，但生成图像容易只追求视觉奇观。实验需要让两种风格显著区分，同时保持产品主体、使用情境和信息层级稳定。",
+      process: [
+        {
+          title: "用同一产品测试两种传播语气",
+          text:
+            "写实路线使用皮肤状态、自然材料和产品质感建立可信度；像素路线把不适与修护转译为游戏关卡和状态变化。现有素材只保留两张完成稿，因此网页聚焦可确认的视觉差异，不补造提示词、生成批次或筛选数据。",
+        },
+      ],
+      solution:
+        "两条路线使用不同画面语法，但共享清楚的产品位置、标题层级和功能暗示。后期通过字体、留白和信息顺序把生成素材收束为可比较的成组方案。",
+      outcome:
+        "完成写实和像素两张成品海报，并建立从视觉方向、生成筛选到后期排版的实验流程。",
+    },
     gallery: [
       {
         type: "image",
-        src: "/media/projects/aigc-posters.webp",
-        alt: "英美松皮炎湿疹海报写实与像素两种方案",
-        caption: "两条视觉路线并置",
-      },
-      {
-        type: "image",
-        src: "/media/projects/aigc/realistic-poster.webp",
-        alt: "英美松皮炎湿疹写实广告海报",
-        caption: "写实商业广告方向",
-      },
-      {
-        type: "image",
         src: "/media/projects/aigc/pixel-poster.webp",
-        alt: "英美松皮炎湿疹像素游戏海报",
-        caption: "像素游戏化传播方向",
+        alt: "英美松像素游戏海报",
+        caption: "像素路线：以游戏状态表现不适与修护",
+        fit: "contain",
+        ratio: "poster",
       },
     ],
   },
