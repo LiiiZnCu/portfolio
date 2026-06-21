@@ -408,15 +408,13 @@ svg {
   gap: 0.4rem 0.8rem;
   width: 100%;
   min-height: 4.35rem;
-  padding: 0.8rem 0;
+  padding: 0.8rem 0.9rem;
   border: 0;
   border-bottom: 1px solid var(--line);
   background: transparent;
   text-align: left;
   cursor: pointer;
-  transition:
-    color 180ms ease-out,
-    padding-left 180ms ease-out;
+  transition: color 180ms ease-out;
 }
 
 .project-tab > span {
@@ -445,7 +443,6 @@ svg {
 
 .project-tab:hover,
 .project-tab.is-active {
-  padding-left: 0.5rem;
   color: var(--accent);
 }
 
@@ -509,8 +506,163 @@ svg {
   object-fit: contain;
 }
 
+.test-results {
+  display: block;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  background: #f5f5f2;
+}
+
+.test-results__header {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: end;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.test-results__header > span {
+  align-self: start;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+}
+
+.test-results__header > div {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+}
+
+.test-results__header strong {
+  color: #1d2a50;
+  font-size: clamp(3.8rem, 8vw, 7rem);
+  font-weight: 500;
+  letter-spacing: -0.08em;
+  line-height: 0.8;
+}
+
+.test-results__header p {
+  max-width: 12rem;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.test-results__metrics {
+  display: grid;
+}
+
+.test-results__metric {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 0.22fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+  min-height: 6.4rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.test-results__metric:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.test-results__metric > strong {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.test-results__values {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.35rem, 1vw, 0.8rem);
+  align-items: end;
+}
+
+.test-results__value {
+  display: grid;
+  grid-template-rows: minmax(2.5rem, 1fr) auto auto;
+  gap: 0.3rem;
+  height: 100%;
+  text-align: center;
+}
+
+.test-results__value i {
+  width: 100%;
+  height: max(12%, var(--result-value));
+  align-self: end;
+  background: #1d2a50;
+}
+
+.test-results__value b {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+}
+
+.test-results__value small {
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  letter-spacing: 0.04em;
+}
+
 .project-lead .project-media {
   max-height: calc(100dvh - 26rem);
+}
+
+.project-figure__media[data-device-frame="iphone-16-pro-max"] {
+  position: relative;
+  width: auto;
+  height: min(70dvh, 44rem);
+  aspect-ratio: 440 / 956;
+  overflow: hidden;
+  border: 3px solid #1d1d1f;
+  border-radius: 12.5% / 5.75%;
+  background: transparent;
+  box-shadow: 0 0.8rem 2rem rgb(15 15 18 / 10%);
+}
+
+.project-figure__media[data-device-frame="iphone-16-pro-max"]::after {
+  position: absolute;
+  top: 1.5%;
+  left: 50%;
+  z-index: 3;
+  width: 30%;
+  height: 4%;
+  border: 1px solid #4b4b50;
+  border-radius: 999px;
+  background: #000;
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 22%),
+    0 0.15rem 0.4rem rgb(0 0 0 / 38%);
+  content: "";
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.project-figure__media[data-device-frame="iphone-16-pro-max"] .project-media {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  border-radius: inherit;
+  background: transparent;
+  object-fit: cover;
+}
+
+.project-lead
+  .project-figure__media[data-device-frame="iphone-16-pro-max"] {
+  height: min(calc(100dvh - 26rem), 38rem);
 }
 
 .project-figure figcaption {
@@ -640,6 +792,10 @@ svg {
 
 .process-block:nth-child(even) .process-block__copy {
   order: 2;
+}
+
+.process-block:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.42fr);
 }
 
 .process-block__copy > span,
@@ -838,7 +994,6 @@ svg {
 
   .project-tab {
     min-height: 4.6rem;
-    padding-right: 0.7rem;
     border-right: 1px solid var(--line);
   }
 
@@ -963,7 +1118,7 @@ svg {
 
   .project-tab {
     min-height: 3.9rem;
-    padding-right: 0;
+    padding-inline: 0.8rem;
     border-right: 0;
   }
 
@@ -979,6 +1134,11 @@ svg {
 
   .project-lead .project-media {
     max-height: 48dvh;
+  }
+
+  .project-lead
+    .project-figure__media[data-device-frame="iphone-16-pro-max"] {
+    height: min(48dvh, 32rem);
   }
 
   .project-aside h3 {
@@ -1003,12 +1163,38 @@ svg {
     order: 0;
   }
 
+  .process-block:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
   .process-block__figure {
     order: 2;
   }
 
   .process-block.is-text-only {
     grid-template-columns: 1fr;
+  }
+
+  .test-results {
+    padding: 1rem;
+  }
+
+  .test-results__header {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .test-results__header > div {
+    align-items: end;
+  }
+
+  .test-results__header strong {
+    font-size: clamp(3.5rem, 18vw, 5rem);
+  }
+
+  .test-results__metric {
+    grid-template-columns: 4.8rem minmax(0, 1fr);
+    min-height: 5.6rem;
   }
 
   .solution-grid,

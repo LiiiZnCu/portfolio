@@ -13,6 +13,26 @@ const explorer = await readFile(
   "utf8",
 );
 
+function readWebpSize(buffer) {
+  const chunkType = buffer.subarray(12, 16).toString("ascii");
+
+  if (chunkType === "VP8X") {
+    return {
+      width: buffer.readUIntLE(24, 3) + 1,
+      height: buffer.readUIntLE(27, 3) + 1,
+    };
+  }
+
+  if (chunkType === "VP8 ") {
+    return {
+      width: buffer.readUInt16LE(26) & 0x3fff,
+      height: buffer.readUInt16LE(28) & 0x3fff,
+    };
+  }
+
+  throw new Error(`不支持的 WebP 类型：${chunkType}`);
+}
+
 test("首屏以个人身份为主标题，PORTFOLIO 只作为站点标识", () => {
   assert.match(html, /<h1[^>]*>\s*黎昕彤\s*<span>Li Xintong<\/span>\s*<\/h1>/);
   assert.doesNotMatch(html, /<h1[^>]*>\s*PORTFOLIO\s*<\/h1>/);
@@ -66,17 +86,21 @@ test("八个项目都使用项目目录中的多张真实素材", async () => {
       ),
       ...project.gallery,
     ];
-    const mediaSources = mediaItems.map((media) => media.src);
+    const fileMediaItems = mediaItems.filter((media) => media.src);
+    const mediaSources = fileMediaItems.map((media) => media.src);
     const mediaHashes = [];
 
+    assert.ok(
+      mediaItems.every((media) => media.src || media.type === "test-results"),
+      `${project.title} 有无法识别的媒体`,
+    );
     assert.equal(
       new Set(mediaSources).size,
       mediaSources.length,
       `${project.title} 存在重复素材`,
     );
 
-    for (const media of mediaItems) {
-      assert.ok(media.src, `${project.title} 有素材缺少地址`);
+    for (const media of fileMediaItems) {
       const mediaUrl = new URL(`../public${media.src}`, import.meta.url);
       await access(mediaUrl);
       const buffer = await readFile(mediaUrl);
@@ -108,6 +132,14 @@ test("项目使用可选择的展厅结构，不连续渲染八张长卡片", ()
   assert.match(explorer, /data-next-project/);
   assert.match(explorer, /data-media-previous/);
   assert.match(explorer, /data-media-next/);
+  assert.match(
+    css,
+    /\.project-tab\s*\{[^}]*padding:\s*0\.8rem 0\.9rem;/s,
+  );
+  assert.doesNotMatch(
+    css,
+    /\.project-tab:hover,\s*\.project-tab\.is-active\s*\{[^}]*padding-left:/s,
+  );
 });
 
 test("空气炸锅和戏曲塔罗都包含真实过程视频", () => {
@@ -186,7 +218,7 @@ test("项目图片按原始比例自适应，不使用固定比例框或图片�
     /\.project-figure__media\s*\{[^}]*background:\s*transparent;/s,
   );
   assert.doesNotMatch(css, /\.project-figure__media\[data-ratio=/);
-  assert.doesNotMatch(css, /aspect-ratio:/);
+  assert.equal((css.match(/aspect-ratio:/g) ?? []).length, 1);
   assert.doesNotMatch(css, /\.project-figure figcaption\s*\{[^}]*border-top:/s);
 });
 
@@ -223,5 +255,75 @@ test("SportLoop 展示六组来自 PPT 的真实交互动效", () => {
   assert.match(
     sportloop.sections.process.at(-1).text,
     /5 名用户|26%|51—62 秒|2—4 分/,
+  );
+});
+
+test("SportLoop 测试结论配有 PPT 原始数据可视化", () => {
+  const sportloop = projectData.find((project) => project.title === "SportLoop");
+  const testing = sportloop.sections.process.at(-1).media;
+
+  assert.equal(testing.type, "test-results");
+  assert.equal(testing.highlight.value, "26%");
+  assert.deepEqual(
+    testing.metrics.map((metric) => metric.values),
+    [
+      [1, 4, 5, 1, 2],
+      [58, 52, 61, 62, 51],
+      [4, 2, 3, 2, 3],
+    ],
+  );
+  assert.match(explorer, /data-test-results/);
+});
+
+test("SportLoop 界面媒体统一使用 iPhone 16 Pro Max 外框", () => {
+  const sportloop = projectData.find((project) => project.title === "SportLoop");
+  const mediaItems = [sportloop.heroMedia, ...sportloop.gallery];
+
+  assert.equal(mediaItems.length, 8);
+  assert.ok(
+    mediaItems.every(
+      (media) => media.deviceFrame === "iphone-16-pro-max",
+    ),
+  );
+  assert.match(explorer, /data-device-frame/);
+  assert.match(
+    css,
+    /\[data-device-frame="iphone-16-pro-max"\]\s*\{[^}]*aspect-ratio:\s*440\s*\/\s*956;/s,
+  );
+  assert.match(css, /\[data-device-frame="iphone-16-pro-max"\]\s*\{[^}]*border:\s*3px solid/s);
+  assert.doesNotMatch(
+    css,
+    /\[data-device-frame="iphone-16-pro-max"\]\s*\{[^}]*padding:/s,
+  );
+  assert.match(
+    css,
+    /\[data-device-frame="iphone-16-pro-max"\][^{]*::after\s*\{/s,
+  );
+  assert.match(
+    css,
+    /\[data-device-frame="iphone-16-pro-max"\] \.project-media\s*\{[^}]*object-fit:\s*cover;/s,
+  );
+});
+
+test("SportLoop 手机媒体文件本身就是 440×956", async () => {
+  const sportloop = projectData.find((project) => project.title === "SportLoop");
+  const mediaItems = [sportloop.heroMedia, ...sportloop.gallery];
+
+  for (const media of mediaItems) {
+    const buffer = await readFile(
+      new URL(`../public${media.src}`, import.meta.url),
+    );
+    assert.deepEqual(readWebpSize(buffer), { width: 440, height: 956 });
+  }
+});
+
+test("过程区左右交错时图片始终使用宽列", () => {
+  assert.match(
+    css,
+    /\.process-block\s*\{[^}]*grid-template-columns:\s*minmax\(15rem,\s*0\.42fr\)\s+minmax\(0,\s*1fr\);/s,
+  );
+  assert.match(
+    css,
+    /\.process-block:nth-child\(even\)\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s+minmax\(15rem,\s*0\.42fr\);/s,
   );
 });

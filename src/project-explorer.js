@@ -6,7 +6,59 @@ function resolveAssetPath(path = "") {
   return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
 }
 
+function createTestResults(media, className) {
+  const metricRows = media.metrics
+    .map(
+      (metric) => `
+        <div class="test-results__metric">
+          <strong>${metric.label}</strong>
+          <div class="test-results__values">
+            ${metric.values
+              .map(
+                (value, index) => `
+                  <span
+                    class="test-results__value"
+                    style="--result-value: ${(value / metric.max) * 100}%"
+                  >
+                    <i aria-hidden="true"></i>
+                    <b>${value}${metric.unit}</b>
+                    <small>U${media.users[index]}</small>
+                  </span>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+      `,
+    )
+    .join("");
+
+  return `
+    <div
+      class="${className} test-results"
+      role="img"
+      aria-label="${media.alt}"
+      data-test-results
+    >
+      <header class="test-results__header">
+        <span>USABILITY TEST / 05 USERS</span>
+        <div>
+          <strong>${media.highlight.value}</strong>
+          <p>${media.highlight.label}</p>
+        </div>
+      </header>
+      <div class="test-results__metrics">
+        ${metricRows}
+      </div>
+    </div>
+  `;
+}
+
 function createMedia(media, className = "") {
+  if (media.type === "test-results") {
+    return createTestResults(media, className);
+  }
+
   if (media.type === "video") {
     return `
       <video
@@ -35,9 +87,13 @@ function createMedia(media, className = "") {
 }
 
 function createFigure(media, className = "") {
+  const deviceFrame = media.deviceFrame
+    ? ` data-device-frame="${media.deviceFrame}"`
+    : "";
+
   return `
     <figure class="project-figure ${className}">
-      <div class="project-figure__media">
+      <div class="project-figure__media"${deviceFrame}>
         ${createMedia(media, "project-media")}
       </div>
       <figcaption>${media.caption}</figcaption>
