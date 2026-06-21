@@ -57,6 +57,11 @@ export const projects = [
             ratio: "wide",
           },
         },
+        {
+          title: "用测试结果校正反馈强度",
+          text:
+            "5 名用户完成借用任务后，焦虑导致的重复点击占异常操作的 26%，单次任务约需 51—62 秒，操作确定感评分集中在 2—4 分。迭代因此加强按钮反馈、状态提示与页面切换，并补充缓存、设备适配、账号保存、NFC 批量录入和报修反馈。",
+        },
       ],
       solution:
         "最终方案提供库存与质量状态、预约和扫码借还、批量器材申请、归还前检测、快速报修和管理端工单。学生端以白底与酒红强调主要操作；管理端使用深色工作台集中展示库存、任务和维护信息。",
@@ -66,21 +71,45 @@ export const projects = [
     gallery: [
       {
         type: "image",
-        src: "/media/projects/sportloop/equipment-list.webp",
-        alt: "SportLoop 器材列表",
-        caption: "器材列表：按类别浏览并查看可借状态",
-      },
-      {
-        type: "image",
         src: "/media/projects/sportloop/equipment-detail.webp",
         alt: "SportLoop 器材详情与借用时长选择",
         caption: "器材详情：借用规则、时长选择与 NFC 入库状态",
       },
       {
         type: "image",
-        src: "/media/projects/sportloop/admin-dashboard.webp",
-        alt: "SportLoop 管理员工作台",
-        caption: "管理端：集中处理库存、任务和维护状态",
+        src: "/media/projects/sportloop/interactions/button-feedback.webp",
+        alt: "SportLoop 按钮点击与操作反馈动效",
+        caption: "点击反馈：主要操作在触发后立即给出明确响应",
+      },
+      {
+        type: "image",
+        src: "/media/projects/sportloop/interactions/admin-carousel.webp",
+        alt: "SportLoop 管理端环形功能切换动效",
+        caption: "管理端环形切换：在有限空间内快速进入常用任务",
+      },
+      {
+        type: "image",
+        src: "/media/projects/sportloop/interactions/pull-refresh.webp",
+        alt: "SportLoop 管理端下拉刷新动效",
+        caption: "下拉刷新：及时同步器材库存和维护任务状态",
+      },
+      {
+        type: "image",
+        src: "/media/projects/sportloop/interactions/equipment-filter.webp",
+        alt: "SportLoop 器材分类筛选动效",
+        caption: "器材筛选：按类别缩小范围并保持可借状态清晰可见",
+      },
+      {
+        type: "image",
+        src: "/media/projects/sportloop/interactions/borrow-flow.webp",
+        alt: "SportLoop 器材借用流程动效",
+        caption: "借用流程：从列表进入任务，并在操作后获得结果反馈",
+      },
+      {
+        type: "image",
+        src: "/media/projects/sportloop/interactions/loan-status.webp",
+        alt: "SportLoop 当前借用状态动效",
+        caption: "借用状态：集中查看当前任务、期限和归还进度",
       },
     ],
   },

@@ -497,18 +497,26 @@ svg {
 }
 
 .project-figure__media {
-  display: block;
+  display: grid;
   min-height: 0;
   overflow: visible;
+  place-items: center;
   background: transparent;
 }
 
 .project-media {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 12rem);
   height: auto;
   min-height: 0;
   border: 0;
+  object-fit: contain;
+}
+
+.project-lead .project-media {
+  max-height: calc(100dvh - 26rem);
 }
 
 .project-figure figcaption {
@@ -969,6 +977,14 @@ svg {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+  }
+
+  .project-media {
+    max-height: 62dvh;
+  }
+
+  .project-lead .project-media {
+    max-height: 48dvh;
   }
 
   .project-aside h3 {
