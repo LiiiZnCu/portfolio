@@ -245,7 +245,7 @@ test("主要项目补齐不重复的成果媒体", () => {
   );
 });
 
-test("SportLoop 展示六组来自 PPT 的真实交互动效", () => {
+test("SportLoop 展示六组从原网页重新录制的真实交互动效", () => {
   const sportloop = projectData.find((project) => project.title === "SportLoop");
   const interactions = sportloop.gallery.filter((media) =>
     media.src.includes("/sportloop/interactions/"),
@@ -315,6 +315,17 @@ test("SportLoop 手机媒体文件本身就是 440×956", async () => {
     );
     assert.deepEqual(readWebpSize(buffer), { width: 440, height: 956 });
   }
+});
+
+test("SportLoop 桌面主手机图不再被视口减法压缩", () => {
+  assert.doesNotMatch(
+    css,
+    /\.project-lead[\s\S]*?data-device-frame="iphone-16-pro-max"[\s\S]*?height:\s*min\(calc\(100dvh\s*-\s*26rem\)/,
+  );
+  assert.match(
+    css,
+    /\.project-lead[\s\S]*?data-device-frame="iphone-16-pro-max"[\s\S]*?height:\s*clamp\(26rem,\s*68dvh,\s*42rem\)/,
+  );
 });
 
 test("过程区左右交错时图片始终使用宽列", () => {

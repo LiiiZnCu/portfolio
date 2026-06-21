@@ -662,7 +662,8 @@ svg {
 
 .project-lead
   .project-figure__media[data-device-frame="iphone-16-pro-max"] {
-  height: min(calc(100dvh - 26rem), 38rem);
+  height: clamp(26rem, 68dvh, 42rem);
+  margin-inline: auto;
 }
 
 .project-figure figcaption {

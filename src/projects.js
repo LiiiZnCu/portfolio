@@ -110,22 +110,22 @@ export const projects = [
       {
         type: "image",
         src: "/media/projects/sportloop/interactions/button-feedback.webp",
-        alt: "SportLoop 按钮点击与操作反馈动效",
-        caption: "点击反馈：主要操作在触发后立即给出明确响应",
+        alt: "SportLoop 从首页进入器材列表的交互动效",
+        caption: "操作反馈：从首页快速进入器材列表",
         deviceFrame: "iphone-16-pro-max",
       },
       {
         type: "image",
         src: "/media/projects/sportloop/interactions/admin-carousel.webp",
-        alt: "SportLoop 管理端环形功能切换动效",
-        caption: "管理端环形切换：在有限空间内快速进入常用任务",
+        alt: "SportLoop 从个人档案切换到管理员工作台的动效",
+        caption: "身份切换：从个人档案进入管理员工作台",
         deviceFrame: "iphone-16-pro-max",
       },
       {
         type: "image",
         src: "/media/projects/sportloop/interactions/pull-refresh.webp",
-        alt: "SportLoop 管理端下拉刷新动效",
-        caption: "下拉刷新：及时同步器材库存和维护任务状态",
+        alt: "SportLoop 借用时长选择动效",
+        caption: "时长选择：按课程节数切换借用时长与归还时间",
         deviceFrame: "iphone-16-pro-max",
       },
       {
