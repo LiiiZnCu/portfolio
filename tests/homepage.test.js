@@ -23,6 +23,8 @@ test("首屏以个人身份为主标题，PORTFOLIO 只作为站点标识", () =
   assert.match(html, /智能交互设计/);
   assert.match(html, /用户研究/);
   assert.match(html, /data-profile-details/);
+  assert.match(html, /PROFILE DETAILS/);
+  assert.doesNotMatch(html, /<details|<summary|展开个人档案/);
 });
 
 test("首页包含项目、关于和联系方式", () => {

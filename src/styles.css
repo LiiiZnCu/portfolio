@@ -312,21 +312,15 @@ svg {
   border-top: 1px solid var(--ink);
 }
 
-.profile-details summary {
+.profile-details__heading {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 1rem;
   align-items: center;
   min-height: 3.75rem;
-  cursor: pointer;
-  list-style: none;
 }
 
-.profile-details summary::-webkit-details-marker {
-  display: none;
-}
-
-.profile-details summary span:first-child,
+.profile-details__heading span:first-child,
 .profile-details__grid span {
   color: var(--accent);
   font-family: var(--font-mono);
@@ -334,7 +328,7 @@ svg {
   letter-spacing: 0.1em;
 }
 
-.profile-details summary span:last-child {
+.profile-details__heading span:last-child {
   color: var(--ink-soft);
   font-size: 0.78rem;
 }

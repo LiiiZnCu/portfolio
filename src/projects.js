@@ -175,7 +175,7 @@ export const projects = [
       solution:
         "产品以紧凑的上下模块形成 Air Fry、Simmer、Sear 三类烹饪能力，采用旋钮、TFT 屏幕、语音提醒和食谱辅助。CMF 使用浅灰白外壳、烟茶色玻璃、深灰硅胶和金属结构，强调耐用、可观察和易清洁。",
       outcome:
-        "项目完成用户研究、结构原理、交互流程、整机建模、结构爆炸、CMF 和使用演示。倒水与沸腾视频片段使用 AI 辅助生成，并在页面中明确标注。",
+        "项目完成用户研究、结构原理、交互流程、整机建模、结构爆炸、CMF 和产品动态展示。",
     },
     gallery: [
       {
@@ -201,7 +201,7 @@ export const projects = [
         src: "/media/projects/versa/process.mp4",
         poster: "/media/projects/versa/product-closed.webp",
         alt: "VERSA 空气炸锅使用演示视频",
-        caption: "使用演示；倒水与沸腾片段使用 AI 辅助生成",
+        caption: "产品动态展示：整机形态、旋钮与透明内胆",
       },
     ],
   },
