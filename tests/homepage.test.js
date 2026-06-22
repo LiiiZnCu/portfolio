@@ -199,6 +199,18 @@ test("个人照片和项目图片保持彩色", () => {
   assert.doesNotMatch(css, /filter:\s*grayscale/);
 });
 
+test("首页使用更新后的竖版个人照片", async () => {
+  assert.match(
+    html,
+    /src="\.\/media\/projects\/portrait\.webp"[\s\S]*?width="900"[\s\S]*?height="1350"/,
+  );
+
+  const portrait = await readFile(
+    new URL("../public/media/projects/portrait.webp", import.meta.url),
+  );
+  assert.deepEqual(readWebpSize(portrait), { width: 900, height: 1350 });
+});
+
 test("首页使用简历中的公开联系方式，不公开手机号和出生日期", () => {
   assert.match(html, /3414887923@qq\.com/);
   assert.doesNotMatch(html, /15812442807|2006\s*\/\s*01\s*\/\s*23/);
