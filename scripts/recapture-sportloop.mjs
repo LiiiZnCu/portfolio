@@ -165,6 +165,86 @@ async function recordInteraction(name, prepare, targetSelector) {
     .toFile(join(interactions, `${name}.webp`));
 }
 
+async function recordAdminFanSwitch() {
+  const name = "admin-fan-switch";
+  const framesDir = join(work, name);
+  mkdirSync(framesDir, { recursive: true });
+  await prepareAdmin("admin");
+
+  let frame = 0;
+  const capture = async () => {
+    await page.screenshot({
+      path: join(framesDir, `frame-${String(frame).padStart(3, "0")}.png`),
+    });
+    frame += 1;
+  };
+
+  for (let index = 0; index < 4; index += 1) await capture();
+
+  const stage = page.locator("[data-admin-fan-stage]");
+  if ((await stage.count()) !== 1) {
+    throw new Error("管理员扇形菜单不唯一");
+  }
+  const box = await stage.boundingBox();
+  if (!box) throw new Error("管理员扇形菜单不可见");
+
+  const startX = box.x + box.width * 0.68;
+  const endX = box.x + box.width * 0.28;
+  const y = box.y + box.height * 0.58;
+  await page.mouse.move(startX, y);
+  await page.mouse.down();
+  for (let index = 1; index <= 10; index += 1) {
+    const x = startX + ((endX - startX) * index) / 10;
+    await page.mouse.move(x, y);
+    await capture();
+    await page.waitForTimeout(28);
+  }
+  await page.mouse.up();
+  for (let index = 0; index < 8; index += 1) {
+    await capture();
+    await page.waitForTimeout(35);
+  }
+  for (let index = 0; index < 8; index += 1) await capture();
+
+  const framePaths = Array.from({ length: frame }, (_, index) =>
+    join(framesDir, `frame-${String(index).padStart(3, "0")}.png`),
+  );
+  const tallHeight = 956 * framePaths.length;
+  const tallBuffer = await sharp({
+    create: {
+      width: 440,
+      height: tallHeight,
+      channels: 4,
+      background: { r: 255, g: 255, b: 255, alpha: 1 },
+    },
+  })
+    .composite(
+      framePaths.map((input, index) => ({
+        input,
+        left: 0,
+        top: index * 956,
+      })),
+    )
+    .raw()
+    .toBuffer();
+
+  await sharp(tallBuffer, {
+    raw: {
+      width: 440,
+      height: tallHeight,
+      channels: 4,
+      pageHeight: 956,
+    },
+  })
+    .webp({
+      quality: 78,
+      effort: 4,
+      loop: 0,
+      delay: Array(framePaths.length).fill(83),
+    })
+    .toFile(join(interactions, `${name}.webp`));
+}
+
 await captureStatic(join(output, "student-home.webp"), () =>
   prepareStudent("home"),
 );
@@ -184,6 +264,7 @@ await recordInteraction(
   () => prepareStudent("home"),
   'button.primary-button[data-route="list"]',
 );
+await recordAdminFanSwitch();
 await recordInteraction(
   "admin-page-switch",
   () => prepareAdmin("admin"),

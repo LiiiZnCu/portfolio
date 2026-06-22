@@ -127,6 +127,13 @@ export const projects = [
       },
       {
         type: "image",
+        src: "/media/projects/sportloop/interactions/admin-fan-switch.webp",
+        alt: "SportLoop 管理员扇形菜单左右切换动效",
+        caption: "管理员扇形菜单：左右滑动切换当前管理模块",
+        deviceFrame: "iphone-16-pro-max",
+      },
+      {
+        type: "image",
         src: "/media/projects/sportloop/interactions/admin-page-switch.webp",
         alt: "SportLoop 管理员工作台切换到器材档案的交互动效",
         caption: "管理端页面切换：从工作台进入器材档案",
