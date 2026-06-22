@@ -199,9 +199,18 @@ export function mountProjectExplorer({
             <h3>${project.title}</h3>
             <p class="project-subtitle">${project.subtitle}</p>
             <p class="project-summary">${project.summary}</p>
-            <ul class="project-facts">
-              ${project.facts.map((fact) => `<li>${fact}</li>`).join("")}
-            </ul>
+            <dl class="project-facts">
+              ${project.facts
+                .map(
+                  (fact) => `
+                    <div>
+                      <dt>${fact.label}</dt>
+                      <dd>${fact.value}</dd>
+                    </div>
+                  `,
+                )
+                .join("")}
+            </dl>
           </aside>
         </div>
 
@@ -223,8 +232,8 @@ export function mountProjectExplorer({
               <p>${project.sections.solution}</p>
             </div>
             <div class="narrative-copy">
-              <p class="project-kicker">04 / OUTCOME</p>
-              <h4>完成结果</h4>
+              <p class="project-kicker">04 / OUTPUT</p>
+              <h4>项目产出</h4>
               <p>${project.sections.outcome}</p>
             </div>
           </div>

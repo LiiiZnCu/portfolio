@@ -226,11 +226,11 @@ svg {
 }
 
 .hero__summary {
-  max-width: 35rem;
+  max-width: 31rem;
   margin: 1.15rem 0 0;
   color: var(--ink-soft);
-  font-size: 0.96rem;
-  line-height: 1.75;
+  font-size: 1rem;
+  line-height: 1.72;
   text-wrap: pretty;
 }
 
@@ -335,17 +335,20 @@ svg {
 
 .profile-details__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns:
+    minmax(0, 1.45fr) minmax(0, 1.15fr)
+    minmax(0, 1.1fr) minmax(0, 0.7fr);
   gap: 2.5rem;
   padding: 1.5rem 0 2.5rem;
   border-top: 1px solid var(--line);
 }
 
 .profile-details__grid p {
+  max-width: 29rem;
   margin: 0.7rem 0 0;
   color: var(--ink-soft);
-  font-size: 0.82rem;
-  line-height: 1.7;
+  font-size: 0.84rem;
+  line-height: 1.65;
 }
 
 .projects-section,
@@ -622,6 +625,7 @@ svg {
 
 .project-figure__media[data-device-frame="iphone-16-pro-max"] {
   position: relative;
+  box-sizing: content-box;
   width: auto;
   height: min(70dvh, 44rem);
   aspect-ratio: 440 / 956;
@@ -730,26 +734,40 @@ svg {
 }
 
 .project-summary {
+  max-width: 31rem;
   margin: 1.5rem 0 0;
   color: var(--ink-soft);
-  font-size: 0.86rem;
-  line-height: 1.75;
+  font-size: 0.9rem;
+  line-height: 1.72;
+  text-wrap: pretty;
 }
 
 .project-facts {
   margin: 2rem 0 0;
-  padding: 0;
   border-top: 1px solid var(--line);
-  list-style: none;
 }
 
-.project-facts li {
-  padding: 0.7rem 0;
+.project-facts > div {
+  display: grid;
+  grid-template-columns: 4.2rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.75rem 0;
   border-bottom: 1px solid var(--line);
-  color: var(--ink-soft);
+}
+
+.project-facts dt {
+  color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.04em;
+  font-size: 0.51rem;
+  letter-spacing: 0.08em;
+}
+
+.project-facts dd {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  line-height: 1.5;
 }
 
 .project-narrative {
@@ -758,8 +776,9 @@ svg {
 
 .narrative-copy {
   display: grid;
-  grid-template-columns: minmax(9rem, 0.32fr) minmax(12rem, 0.4fr) minmax(18rem, 0.75fr);
-  gap: 2rem;
+  grid-template-columns: minmax(7rem, 0.24fr) minmax(12rem, 0.45fr) minmax(22rem, 0.9fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
   padding: 2rem 0;
   border-top: 1px solid var(--ink);
 }
@@ -772,10 +791,12 @@ svg {
 }
 
 .narrative-copy > p:last-child {
+  max-width: 46rem;
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.9rem;
-  line-height: 1.8;
+  font-size: 0.94rem;
+  line-height: 1.75;
+  text-wrap: pretty;
 }
 
 .project-process {
@@ -816,10 +837,12 @@ svg {
 }
 
 .process-block__copy p {
+  max-width: 34rem;
   margin: 1.25rem 0 0;
   color: var(--ink-soft);
-  font-size: 0.88rem;
-  line-height: 1.8;
+  font-size: 0.93rem;
+  line-height: 1.75;
+  text-wrap: pretty;
 }
 
 .process-block.is-text-only {

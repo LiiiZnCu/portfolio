@@ -12,6 +12,10 @@ const explorer = await readFile(
   new URL("../src/project-explorer.js", import.meta.url),
   "utf8",
 );
+const sportloopCapture = await readFile(
+  new URL("../scripts/recapture-sportloop.mjs", import.meta.url),
+  "utf8",
+);
 
 function readWebpSize(buffer) {
   const chunkType = buffer.subarray(12, 16).toString("ascii");
@@ -31,6 +35,26 @@ function readWebpSize(buffer) {
   }
 
   throw new Error(`不支持的 WebP 类型：${chunkType}`);
+}
+
+function readAnimatedWebpMetadata(buffer) {
+  const durations = [];
+  let loop = null;
+  let offset = 12;
+
+  while (offset + 8 <= buffer.length) {
+    const type = buffer.subarray(offset, offset + 4).toString("ascii");
+    const size = buffer.readUInt32LE(offset + 4);
+    if (type === "ANIM" && offset + 14 <= buffer.length) {
+      loop = buffer.readUInt16LE(offset + 12);
+    }
+    if (type === "ANMF" && offset + 23 <= buffer.length) {
+      durations.push(buffer.readUIntLE(offset + 20, 3));
+    }
+    offset += 8 + size + (size % 2);
+  }
+
+  return { durations, loop };
 }
 
 test("首屏以个人身份为主标题，PORTFOLIO 只作为站点标识", () => {
@@ -77,6 +101,10 @@ test("八个项目都使用项目目录中的多张真实素材", async () => {
     assert.ok(project.sections?.process?.length >= 1, `${project.title} 缺少过程节点`);
     assert.ok(project.sections?.solution?.length >= 30, `${project.title} 缺少方案说明`);
     assert.ok(project.sections?.outcome?.length >= 20, `${project.title} 缺少结果说明`);
+    assert.ok(
+      project.facts.every((fact) => fact.label && fact.value),
+      `${project.title} 缺少清晰的项目范围、方法或产出标签`,
+    );
     assert.ok(Array.isArray(project.gallery), `${project.title} 缺少结果素材列表`);
 
     const mediaItems = [
@@ -245,17 +273,98 @@ test("主要项目补齐不重复的成果媒体", () => {
   );
 });
 
-test("SportLoop 展示六组从原网页重新录制的真实交互动效", () => {
+test("SportLoop 展示从最新网页重新录制的真实交互动效", () => {
   const sportloop = projectData.find((project) => project.title === "SportLoop");
   const interactions = sportloop.gallery.filter((media) =>
     media.src.includes("/sportloop/interactions/"),
   );
 
-  assert.equal(interactions.length, 6);
+  assert.equal(interactions.length, 4);
   assert.match(
     sportloop.sections.process.at(-1).text,
     /5 名用户|26%|51—62 秒|2—4 分/,
   );
+});
+
+test("SportLoop 八项媒体与说明文字一一对应", () => {
+  const sportloop = projectData.find((project) => project.title === "SportLoop");
+  const mediaItems = [sportloop.heroMedia, ...sportloop.gallery];
+
+  assert.deepEqual(
+    mediaItems.map(({ src, caption }) => ({ src, caption })),
+    [
+      {
+        src: "/media/projects/sportloop/student-home.webp",
+        caption: "学生端首页：借用状态、场馆信息与核心操作入口",
+      },
+      {
+        src: "/media/projects/sportloop/equipment-detail.webp",
+        caption: "器材详情：借用规则、时长选择与 NFC 入库状态",
+      },
+      {
+        src: "/media/projects/sportloop/interactions/page-transition.webp",
+        caption: "页面切换：首页进入器材列表时保持清楚的空间反馈",
+      },
+      {
+        src: "/media/projects/sportloop/admin-dashboard.webp",
+        caption: "管理员工作台：留言、任务、库存与管理功能集中展示",
+      },
+      {
+        src: "/media/projects/sportloop/interactions/admin-page-switch.webp",
+        caption: "管理端页面切换：从工作台进入器材档案",
+      },
+      {
+        src: "/media/projects/sportloop/interactions/period-select.webp",
+        caption: "时长选择：按课程节数更新借用时长",
+      },
+      {
+        src: "/media/projects/sportloop/interactions/equipment-filter.webp",
+        caption: "器材筛选：切换类别后直接更新列表内容",
+      },
+      {
+        src: "/media/projects/sportloop/profile.webp",
+        caption: "个人档案：借用状态、归还率、快捷操作与提醒",
+      },
+    ],
+  );
+});
+
+test("SportLoop 动图包含可见时长，不再导出成瞬间结束的零时长帧", async () => {
+  const sportloop = projectData.find((project) => project.title === "SportLoop");
+  const interactions = sportloop.gallery.filter((media) =>
+    media.src.includes("/sportloop/interactions/"),
+  );
+
+  for (const media of interactions) {
+    const buffer = await readFile(
+      new URL(`../public${media.src}`, import.meta.url),
+    );
+    const { durations, loop } = readAnimatedWebpMetadata(buffer);
+    assert.ok(durations.length >= 2, `${media.src} 动画帧不足`);
+    assert.equal(loop, 0, `${media.src} 没有循环播放`);
+    assert.ok(
+      durations.every((duration) => duration >= 60),
+      `${media.src} 存在零时长或过快的动画帧`,
+    );
+    assert.ok(
+      durations.reduce((total, duration) => total + duration, 0) >= 1_500,
+      `${media.src} 动画停留时间不足`,
+    );
+    assert.ok(durations.at(-1) >= 900, `${media.src} 最终状态停留时间不足`);
+  }
+});
+
+test("SportLoop 截图模拟 iPhone 顶部安全区，灵动岛不遮挡页面标题", () => {
+  assert.match(
+    sportloopCapture,
+    /\.app \{ padding-top: 65px !important; \}/,
+  );
+});
+
+test("SportLoop 个人页截图前确认档案袋图片真实加载完成", () => {
+  assert.match(sportloopCapture, /waitForLoadedImages/);
+  assert.match(sportloopCapture, /required\.naturalWidth > 0/);
+  assert.match(sportloopCapture, /"\.profile-folder-img"/);
 });
 
 test("SportLoop 测试结论配有 PPT 原始数据可视化", () => {
@@ -289,6 +398,10 @@ test("SportLoop 界面媒体统一使用 iPhone 16 Pro Max 外框", () => {
   assert.match(
     css,
     /\[data-device-frame="iphone-16-pro-max"\]\s*\{[^}]*aspect-ratio:\s*440\s*\/\s*956;/s,
+  );
+  assert.match(
+    css,
+    /\[data-device-frame="iphone-16-pro-max"\]\s*\{[^}]*box-sizing:\s*content-box;/s,
   );
   assert.match(css, /\[data-device-frame="iphone-16-pro-max"\]\s*\{[^}]*border:\s*3px solid/s);
   assert.doesNotMatch(

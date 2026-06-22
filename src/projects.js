@@ -7,7 +7,11 @@ export const projects = [
     category: "交互设计",
     summary:
       "面向学生、校队和管理员的双端系统，把器材查询、借还、报损与维护连接成持续更新的状态闭环。",
-    facts: ["双端网页系统", "用户研究 / 信息架构 / 原型", "校园公共服务"],
+    facts: [
+      { label: "SCOPE", value: "双端网页系统" },
+      { label: "METHOD", value: "用户研究 / 信息架构 / 原型" },
+      { label: "OUTPUT", value: "学生端 / 管理端 / 交互动效" },
+    ],
     heroMedia: {
       type: "image",
       src: "/media/projects/sportloop/student-home.webp",
@@ -109,44 +113,44 @@ export const projects = [
       },
       {
         type: "image",
-        src: "/media/projects/sportloop/interactions/button-feedback.webp",
-        alt: "SportLoop 从首页进入器材列表的交互动效",
-        caption: "操作反馈：从首页快速进入器材列表",
+        src: "/media/projects/sportloop/interactions/page-transition.webp",
+        alt: "SportLoop 从首页切换到器材列表的交互动效",
+        caption: "页面切换：首页进入器材列表时保持清楚的空间反馈",
         deviceFrame: "iphone-16-pro-max",
       },
       {
         type: "image",
-        src: "/media/projects/sportloop/interactions/admin-carousel.webp",
-        alt: "SportLoop 从个人档案切换到管理员工作台的动效",
-        caption: "身份切换：从个人档案进入管理员工作台",
+        src: "/media/projects/sportloop/admin-dashboard.webp",
+        alt: "SportLoop 最新管理员工作台",
+        caption: "管理员工作台：留言、任务、库存与管理功能集中展示",
         deviceFrame: "iphone-16-pro-max",
       },
       {
         type: "image",
-        src: "/media/projects/sportloop/interactions/pull-refresh.webp",
+        src: "/media/projects/sportloop/interactions/admin-page-switch.webp",
+        alt: "SportLoop 管理员工作台切换到器材档案的交互动效",
+        caption: "管理端页面切换：从工作台进入器材档案",
+        deviceFrame: "iphone-16-pro-max",
+      },
+      {
+        type: "image",
+        src: "/media/projects/sportloop/interactions/period-select.webp",
         alt: "SportLoop 借用时长选择动效",
-        caption: "时长选择：按课程节数切换借用时长与归还时间",
+        caption: "时长选择：按课程节数更新借用时长",
         deviceFrame: "iphone-16-pro-max",
       },
       {
         type: "image",
         src: "/media/projects/sportloop/interactions/equipment-filter.webp",
-        alt: "SportLoop 器材分类筛选动效",
-        caption: "器材筛选：按类别缩小范围并保持可借状态清晰可见",
+        alt: "SportLoop 最新器材分类筛选动效",
+        caption: "器材筛选：切换类别后直接更新列表内容",
         deviceFrame: "iphone-16-pro-max",
       },
       {
         type: "image",
-        src: "/media/projects/sportloop/interactions/borrow-flow.webp",
-        alt: "SportLoop 器材借用流程动效",
-        caption: "借用流程：从列表进入任务，并在操作后获得结果反馈",
-        deviceFrame: "iphone-16-pro-max",
-      },
-      {
-        type: "image",
-        src: "/media/projects/sportloop/interactions/loan-status.webp",
-        alt: "SportLoop 当前借用状态动效",
-        caption: "借用状态：集中查看当前任务、期限和归还进度",
+        src: "/media/projects/sportloop/profile.webp",
+        alt: "SportLoop 最新个人借用档案页面",
+        caption: "个人档案：借用状态、归还率、快捷操作与提醒",
         deviceFrame: "iphone-16-pro-max",
       },
     ],
@@ -159,7 +163,11 @@ export const projects = [
     category: "产品设计",
     summary:
       "为一人食场景设计的多功能烹饪系统，把空气炸、炖煮与煎烤整合进可观察、可拆洗的产品结构。",
-    facts: ["产品结构与制造", "Rhino / KeyShot / CMF", "小组课程项目"],
+    facts: [
+      { label: "SCOPE", value: "产品结构 / 交互 / CMF" },
+      { label: "METHOD", value: "用户旅程 / 结构推演" },
+      { label: "OUTPUT", value: "建模 / 渲染 / 动态演示" },
+    ],
     heroMedia: {
       type: "image",
       src: "/media/projects/versa/product-closed.webp",
@@ -251,7 +259,11 @@ export const projects = [
     category: "三维设计",
     summary:
       "围绕弧形轮廓、金属刃面和握柄转折，练习产品曲面、材质、灯光与环境叙事。",
-    facts: ["三维建模与渲染", "产品造型练习", "材质 / 灯光 / 场景"],
+    facts: [
+      { label: "SCOPE", value: "三维造型练习" },
+      { label: "METHOD", value: "曲面 / 材质 / 灯光" },
+      { label: "OUTPUT", value: "两组场景渲染" },
+    ],
     heroMedia: {
       type: "image",
       src: "/media/projects/arc-blade/studio.webp",
@@ -293,7 +305,11 @@ export const projects = [
     category: "视觉设计",
     summary:
       "把戏曲人物、戏服与道具映射到塔罗牌义，形成像素卡面、卡背和包装系统。",
-    facts: ["文化视觉设计", "ComfyUI 参考 / 手绘重构", "卡牌与包装"],
+    facts: [
+      { label: "SCOPE", value: "文化视觉系统" },
+      { label: "METHOD", value: "原型研究 / 手绘重构" },
+      { label: "OUTPUT", value: "卡组 / 包装 / 制作动画" },
+    ],
     heroMedia: {
       type: "image",
       src: "/media/projects/opera-tarot/cards-spread.webp",
@@ -380,7 +396,11 @@ export const projects = [
     category: "信息设计",
     summary:
       "把抽象的团队凝聚力拆解为战术结构、跑动覆盖、球员联系和情绪节点，形成连续双展板。",
-    facts: ["信息可视化", "足球数据与叙事", "双展板"],
+    facts: [
+      { label: "SCOPE", value: "信息可视化" },
+      { label: "METHOD", value: "系统路径 / 信息编码" },
+      { label: "OUTPUT", value: "数据对照 / 双展板" },
+    ],
     heroMedia: {
       type: "image",
       src: "/media/projects/argentina/system-path.webp",
@@ -439,7 +459,11 @@ export const projects = [
     category: "机械制作",
     summary:
       "用循环轨道和三叶轮爬楼机器人理解传感、运动机构、动力与实体测试之间的关系。",
-    facts: ["控制与结构课程", "实体模型 / 3D 打印", "传感与机械结构"],
+    facts: [
+      { label: "SCOPE", value: "控制与机械结构" },
+      { label: "METHOD", value: "草图 / 实体测试 / 3D 打印" },
+      { label: "OUTPUT", value: "循环轨道 / 爬楼整机" },
+    ],
     heroMedia: {
       type: "image",
       src: "/media/projects/mechanical/track-overview.webp",
@@ -532,7 +556,11 @@ export const projects = [
     category: "空间装置",
     summary:
       "照片、花材、镜面、石块与灯带共同构成一处在日间和夜间发生变化的记忆场景。",
-    facts: ["空间装置", "混合媒介", "材料与灯光"],
+    facts: [
+      { label: "SCOPE", value: "空间装置" },
+      { label: "METHOD", value: "材料组织 / 灯光实验" },
+      { label: "OUTPUT", value: "日间 / 夜间展示" },
+    ],
     heroMedia: {
       type: "image",
       src: "/media/projects/memory/day.webp",
@@ -583,7 +611,11 @@ export const projects = [
     category: "视觉实验",
     summary:
       "同一护理产品分别采用写实广告和像素游戏两种视觉语言，比较生成素材如何被转译为商业海报。",
-    facts: ["AIGC 海报", "双视觉路线", "生成与后期版式"],
+    facts: [
+      { label: "SCOPE", value: "AIGC 视觉实验" },
+      { label: "METHOD", value: "生成 / 筛选 / 后期版式" },
+      { label: "OUTPUT", value: "两种视觉路线" },
+    ],
     heroMedia: {
       type: "image",
       src: "/media/projects/aigc/realistic-poster.webp",
