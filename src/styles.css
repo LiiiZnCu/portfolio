@@ -493,6 +493,12 @@ svg {
   align-items: start;
 }
 
+.project-media-viewer {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
 .project-figure {
   margin: 0;
 }
@@ -723,6 +729,8 @@ svg {
 .project-aside {
   position: sticky;
   top: calc(var(--header-height) + 1.5rem);
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .project-aside h3 {
@@ -1030,14 +1038,8 @@ svg {
     border-right: 1px solid var(--line);
   }
 
-  .project-lead {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
   .project-aside {
     position: static;
-    max-width: 42rem;
   }
 }
 

@@ -203,6 +203,29 @@ test("项目使用可选择的展厅结构，不连续渲染八张长卡片", ()
   );
 });
 
+test("项目首屏在手机先介绍后媒体，iPad 保持双栏展示", () => {
+  assert.match(
+    explorer,
+    /<div class="project-lead">\s*<aside class="project-aside">[\s\S]*?<\/aside>\s*<div class="project-media-viewer"/,
+  );
+  assert.match(
+    css,
+    /\.project-media-viewer\s*\{[^}]*grid-column:\s*1;[^}]*grid-row:\s*1;/s,
+  );
+  assert.match(
+    css,
+    /\.project-aside\s*\{[^}]*grid-column:\s*2;[^}]*grid-row:\s*1;/s,
+  );
+  assert.doesNotMatch(
+    css,
+    /@media \(max-width: 1180px\)[\s\S]*?\.project-lead\s*\{[^}]*grid-template-columns:\s*1fr;/,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 760px\)[\s\S]*?\.project-lead\s*\{[^}]*flex-direction:\s*column;/,
+  );
+});
+
 test("空气炸锅和戏曲塔罗都包含真实过程视频", () => {
   const versa = projectData.find((project) => project.title === "VERSA");
   const tarot = projectData.find(

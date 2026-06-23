@@ -210,10 +210,6 @@ export function mountProjectExplorer({
         tabindex="0"
       >
         <div class="project-lead">
-          <div class="project-media-viewer" data-media-viewer>
-            ${createMediaViewer(mediaItems, activeMediaIndex)}
-          </div>
-
           <aside class="project-aside">
             <p class="project-kicker">${project.number} / ${project.category}</p>
             <h3>${project.title}</h3>
@@ -232,6 +228,10 @@ export function mountProjectExplorer({
                 .join("")}
             </dl>
           </aside>
+
+          <div class="project-media-viewer" data-media-viewer>
+            ${createMediaViewer(mediaItems, activeMediaIndex)}
+          </div>
         </div>
 
         <section class="project-narrative">
