@@ -141,15 +141,51 @@ function createProjectTab(project, index, activeIndex) {
 }
 
 function createProcessSection(section, index) {
+  const processLabel =
+    section.phase || `${String(index + 1).padStart(2, "0")} / PROCESS`;
+
   return `
     <article class="process-block${section.media ? "" : " is-text-only"}">
       <div class="process-block__copy">
-        <span>${String(index + 1).padStart(2, "0")} / PROCESS</span>
+        <span>${processLabel}</span>
         <h4>${section.title}</h4>
         <p>${section.text}</p>
       </div>
       ${section.media ? createFigure(section.media, "process-block__figure") : ""}
     </article>
+  `;
+}
+
+function createSubprojectOverview(subprojects) {
+  if (!subprojects?.length) return "";
+
+  return `
+    <div class="project-subprojects" aria-label="两个小项目分组">
+      ${subprojects
+        .map(
+          (subproject) => `
+            <article class="subproject-card">
+              <div class="subproject-card__media-wrap">
+                ${createMedia(
+                  subproject.media,
+                  "project-media subproject-card__media",
+                )}
+              </div>
+              <div class="subproject-card__copy">
+                <span>${subproject.label}</span>
+                <h5>${subproject.title}</h5>
+                <p>${subproject.summary}</p>
+                <ul>
+                  ${subproject.points
+                    .map((point) => `<li>${point}</li>`)
+                    .join("")}
+                </ul>
+              </div>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
   `;
 }
 
@@ -240,6 +276,8 @@ export function mountProjectExplorer({
             <h4>问题与目标</h4>
             <p>${project.sections.problem}</p>
           </div>
+
+          ${createSubprojectOverview(project.subprojects)}
 
           <div class="project-process">
             ${project.sections.process.map(createProcessSection).join("")}

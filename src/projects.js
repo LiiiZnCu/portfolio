@@ -465,7 +465,7 @@ export const projects = [
     subtitle: "智能施工物流轨道 / 三叶轮爬楼机器人",
     category: "机械制作",
     summary:
-      "把传感触发、轨道路由和三叶轮结构做成可运行的机械实验。",
+      "两个小课题分别验证轨道触发和台阶攀爬，把控制、传动和实体测试放在同一组机械练习中。",
     facts: [
       { label: "SCOPE", value: "控制与机械结构" },
       { label: "METHOD", value: "草图 / 实体测试 / 3D 打印" },
@@ -473,18 +473,47 @@ export const projects = [
     ],
     heroMedia: {
       type: "image",
-      src: "/media/projects/mechanical/track-overview.webp",
-      alt: "智能施工物流小车轨道全景",
-      caption: "模拟现代工地内部物流的循环轨道",
+      src: "/media/projects/mechanical.webp",
+      alt: "智能施工物流轨道与三叶轮爬楼机器人并列展示",
+      caption: "两个小课题：循环轨道负责路径与触发，三叶轮机器人负责传动与攀爬",
       fit: "cover",
       ratio: "wide",
     },
+    subprojects: [
+      {
+        label: "A / TRACK",
+        title: "智能施工物流轨道",
+        summary:
+          "用红外小车触发照明、分流、塔桥、传送带和入库机构，重点验证路径闭环和机构联动。",
+        points: ["路线闭环", "感应触发", "机构联动"],
+        media: {
+          type: "image",
+          src: "/media/projects/mechanical/track-overview.webp",
+          alt: "智能施工物流轨道模型全景",
+          caption: "智能施工物流轨道模型全景",
+        },
+      },
+      {
+        label: "B / CLIMBER",
+        title: "三叶轮爬楼机器人",
+        summary:
+          "用齿轮传动和三叶轮抓地解决台阶攀爬，重点验证重心、轮轴和台阶尺度的配合。",
+        points: ["齿轮传动", "三叶轮抓地", "台阶测试"],
+        media: {
+          type: "image",
+          src: "/media/projects/mechanical/robot-on-stairs.webp",
+          alt: "三叶轮爬楼机器人在台阶上测试",
+          caption: "三叶轮爬楼机器人台阶测试",
+        },
+      },
+    ],
     sections: {
       problem:
-        "轨道需要让红外小车在无人干预下连续触发照明、分流、桥梁、传送和入库等机构；爬楼机器人则要在不用履带和跳跃的条件下，协调抓地、重心、动力与台阶尺度。",
+        "这个项目由两个机械小课题组成：轨道系统要让红外小车连续触发多组机构，爬楼机器人要在不用履带和跳跃的条件下完成台阶攀爬。两者共同指向控制、结构和实体测试之间的关系。",
       process: [
         {
-          title: "先用草图安排路线与机构",
+          phase: "A / 轨道系统",
+          title: "用草图规划轨道闭环",
           text:
             "轨道草图同时规划小车路线、装置位置和触发顺序。智能施工物流主题把各机构对应为夜间照明、货物分流、塔桥限行、传送带和仓库闸门。",
           media: {
@@ -497,7 +526,8 @@ export const projects = [
           },
         },
         {
-          title: "实体制作暴露结构问题",
+          phase: "A / 轨道系统",
+          title: "把触发问题放进实体测试",
           text:
             "瓦楞纸与雪弗板用于快速搭建，测试中不断调整桥梁、支架、传送和传感位置，直到小车能完成多个装置的连续循环。",
           media: {
@@ -510,7 +540,8 @@ export const projects = [
           },
         },
         {
-          title: "三叶轮抓住台阶边缘",
+          phase: "B / 爬楼机器人",
+          title: "用三叶轮处理台阶边缘",
           text:
             "爬楼车从多足生物的抓附动作获得灵感，把圆轮改为带齿三叶轮。电机驱动主齿轮，通过多组齿轮实现一驱四动；3D 打印框架保证结构精度。",
           media: {
@@ -522,6 +553,20 @@ export const projects = [
             ratio: "wide",
           },
         },
+        {
+          phase: "B / 爬楼机器人",
+          title: "在真实台阶上验证攀爬",
+          text:
+            "最终测试把机器人放到实体台阶上，观察三叶轮挂住台阶边缘、带动机身翻转和重心继续前移的连续动作。",
+          media: {
+            type: "image",
+            src: "/media/projects/mechanical/robot-on-stairs.webp",
+            alt: "三叶轮爬楼机器人在台阶上测试",
+            caption: "实体台阶测试：三叶轮挂住边缘后带动机身继续上爬",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
       ],
       solution:
         "两个课题都以“先假设、再制作、靠测试修正”为方法。轨道把传感与机构隐藏在场景中，机器人则通过齿轮、三叶轮和重心配合完成台阶攀爬。",
@@ -529,6 +574,12 @@ export const projects = [
         "最终小车能够循环通过多组感应机构；爬楼机器人完成小模型验证和 3D 打印大模型，并在真实台阶上完成攀爬。",
     },
     gallery: [
+      {
+        type: "image",
+        src: "/media/projects/mechanical/track-overview.webp",
+        alt: "智能施工物流小车轨道全景",
+        caption: "轨道全景：循环路线、坡道、桥梁和触发装置",
+      },
       {
         type: "image",
         src: "/media/projects/mechanical/track-detail.webp",
@@ -546,12 +597,6 @@ export const projects = [
         src: "/media/projects/mechanical/gear-detail.webp",
         alt: "爬楼梯机器人齿轮传动细节",
         caption: "传动细节：电机、齿轮组与轮轴连接",
-      },
-      {
-        type: "image",
-        src: "/media/projects/mechanical/robot-on-stairs.webp",
-        alt: "爬楼梯机器人在台阶上测试",
-        caption: "三叶轮机器人在实体台阶上的攀爬结果",
       },
     ],
   },

@@ -13,6 +13,7 @@ export const mediaDimensions = {
   },
   "/media/projects/argentina/system-path.webp": { width: 736, height: 1160 },
   "/media/projects/argentina/team-structure.webp": { width: 850, height: 820 },
+  "/media/projects/mechanical.webp": { width: 1600, height: 1100 },
   "/media/projects/mechanical/design-sketch.webp": { width: 2200, height: 1050 },
   "/media/projects/mechanical/gear-detail.webp": { width: 920, height: 614 },
   "/media/projects/mechanical/process-track.webp": { width: 2200, height: 980 },

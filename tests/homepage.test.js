@@ -376,6 +376,7 @@ test("机械项目改为作品集风格的独立过程图", async () => {
     "/media/projects/mechanical/design-sketch.webp",
     "/media/projects/mechanical/process-track.webp",
     "/media/projects/mechanical/robot-structure.webp",
+    "/media/projects/mechanical/robot-on-stairs.webp",
   ]);
 
   const expectedSizes = new Map([
@@ -388,6 +389,27 @@ test("机械项目改为作品集风格的独立过程图", async () => {
     const imageBuffer = await readFile(new URL(`../public${src}`, import.meta.url));
     assert.deepEqual(readWebpSize(imageBuffer), expectedSize);
   }
+});
+
+test("机械项目按两个小项目分组展示", () => {
+  const mechanical = projectData.find((item) => item.id === "mechanical");
+
+  assert.equal(mechanical.heroMedia.src, "/media/projects/mechanical.webp");
+  assert.deepEqual(
+    mechanical.subprojects.map((item) => item.title),
+    ["智能施工物流轨道", "三叶轮爬楼机器人"],
+  );
+
+  const phaseCounts = mechanical.sections.process.reduce((counts, section) => {
+    counts.set(section.phase, (counts.get(section.phase) ?? 0) + 1);
+    return counts;
+  }, new Map());
+
+  assert.equal(phaseCounts.get("A / 轨道系统"), 2);
+  assert.equal(phaseCounts.get("B / 爬楼机器人"), 2);
+  assert.match(explorer, /function createSubprojectOverview/);
+  assert.match(explorer, /project\.subprojects/);
+  assert.match(css, /\.project-subprojects\s*\{/);
 });
 
 test("SportLoop 展示从最新网页重新录制的真实交互动效", () => {
