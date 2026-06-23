@@ -77,6 +77,32 @@ test("首页包含项目、关于和联系方式", () => {
   assert.match(html, /id="contact"/);
 });
 
+test("首页定位文案自然，个人档案按内容自适应换行", () => {
+  assert.match(html, /<p class="hero__role">\s*智能交互设计\s*<\/p>/);
+  assert.match(html, /关注视觉设计、交互体验与 AI\s+辅助创作/);
+  assert.doesNotMatch(html, /产品与交互设计学生。/);
+  assert.match(
+    css,
+    /\.profile-details__grid\s*\{[^}]*repeat\(\s*auto-fit,\s*minmax\(\s*min\(100%,\s*16rem\),\s*1fr\s*\)\s*\)/s,
+  );
+  assert.match(
+    css,
+    /\.profile-details__heading span\s*\{[^}]*white-space:\s*nowrap;/s,
+  );
+  assert.match(
+    css,
+    /\.profile-facts dd,[\s\S]*?\.profile-details__grid p\s*\{[^}]*word-break:\s*keep-all;/s,
+  );
+  assert.match(
+    css,
+    /\.test-results__header p\s*\{[^}]*text-wrap:\s*pretty;/s,
+  );
+  assert.match(
+    css,
+    /\.narrative-copy h4,[\s\S]*?\.process-block__copy h4\s*\{[^}]*text-wrap:\s*balance;/s,
+  );
+});
+
 test("项目区不显示多余的阅读说明", () => {
   assert.doesNotMatch(
     html,
