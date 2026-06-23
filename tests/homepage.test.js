@@ -116,7 +116,7 @@ test("首页列出八个真实项目且不使用生成图片", () => {
   assert.match(projects, /弧刃/);
   assert.match(projects, /一袭戏服，一种人生/);
   assert.match(projects, /从凝视到亲吻/);
-  assert.match(projects, /控制理论与结构原理/);
+  assert.match(projects, /轨迹与攀爬/);
   assert.match(projects, /生长中的记忆/);
   assert.match(projects, /英美松皮炎湿疹海报/);
   assert.match(projects, /number: "08"/);
@@ -345,7 +345,7 @@ test("主要项目补齐不重复的成果媒体", () => {
     ["SportLoop", 9],
     ["VERSA", 5],
     ["一袭戏服，一种人生", 4],
-    ["控制理论与结构原理", 5],
+    ["轨迹与攀爬", 5],
   ]);
 
   for (const [title, expectedCount] of expectedMediaCounts) {
@@ -361,6 +361,33 @@ test("主要项目补齐不重复的成果媒体", () => {
     projects,
     /src:\s*"\/media\/projects\/(?:sportloop|versa)\.webp"/,
   );
+});
+
+test("机械项目改为作品集风格的独立过程图", async () => {
+  const mechanical = projectData.find((item) => item.id === "mechanical");
+
+  assert.equal(mechanical.title, "轨迹与攀爬");
+  assert.doesNotMatch(projects, /控制理论与结构原理/);
+
+  const processMedia = mechanical.sections.process.map(
+    (section) => section.media.src,
+  );
+  assert.deepEqual(processMedia, [
+    "/media/projects/mechanical/design-sketch.webp",
+    "/media/projects/mechanical/process-track.webp",
+    "/media/projects/mechanical/robot-structure.webp",
+  ]);
+
+  const expectedSizes = new Map([
+    ["/media/projects/mechanical/design-sketch.webp", { width: 2200, height: 1050 }],
+    ["/media/projects/mechanical/process-track.webp", { width: 2200, height: 980 }],
+    ["/media/projects/mechanical/robot-structure.webp", { width: 2200, height: 1100 }],
+  ]);
+
+  for (const [src, expectedSize] of expectedSizes) {
+    const imageBuffer = await readFile(new URL(`../public${src}`, import.meta.url));
+    assert.deepEqual(readWebpSize(imageBuffer), expectedSize);
+  }
 });
 
 test("SportLoop 展示从最新网页重新录制的真实交互动效", () => {
