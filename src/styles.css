@@ -501,6 +501,10 @@ svg {
   object-fit: contain;
 }
 
+.project-media.is-deferred {
+  width: 100%;
+}
+
 .test-results {
   display: block;
   width: 100%;
@@ -609,10 +613,6 @@ svg {
   font-family: var(--font-mono);
   font-size: 0.48rem;
   letter-spacing: 0.04em;
-}
-
-.project-lead .project-media {
-  max-height: calc(100dvh - 26rem);
 }
 
 .project-figure__media[data-device-frame="iphone-16-pro-max"] {

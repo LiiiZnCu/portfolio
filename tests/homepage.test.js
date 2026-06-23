@@ -248,7 +248,7 @@ test("项目图片按原始比例自适应，不使用固定比例框或图片�
     /\.project-media\s*\{[^}]*max-height:\s*calc\(100dvh - 12rem\);/s,
   );
   assert.match(css, /\.project-media\s*\{[^}]*object-fit:\s*contain;/s);
-  assert.match(
+  assert.doesNotMatch(
     css,
     /\.project-lead \.project-media\s*\{[^}]*max-height:\s*calc\(100dvh - 26rem\);/s,
   );
@@ -267,6 +267,28 @@ test("项目图片按原始比例自适应，不使用固定比例框或图片�
   assert.doesNotMatch(css, /\.project-figure__media\[data-ratio=/);
   assert.equal((css.match(/aspect-ratio:/g) ?? []).length, 1);
   assert.doesNotMatch(css, /\.project-figure figcaption\s*\{[^}]*border-top:/s);
+});
+
+test("项目首图优先加载，其余媒体延后加载并预留准确尺寸", () => {
+  assert.match(explorer, /fetchpriority="\$\{isPriority \? "high" : "auto"\}"/);
+  assert.match(explorer, /loading="\$\{isPriority \? "eager" : "lazy"\}"/);
+  assert.match(explorer, /preload="none"/);
+  assert.match(explorer, /decoding="\$\{isPriority \? "sync" : "async"\}"/);
+  assert.match(explorer, /width="\$\{dimensions\.width\}"/);
+  assert.match(explorer, /height="\$\{dimensions\.height\}"/);
+  assert.match(explorer, /createFigure\(media,\s*"project-lead__figure",\s*true\)/);
+  assert.doesNotMatch(explorer, /new Image\(\)|preloadRelatedMedia/);
+});
+
+test("过程媒体加载前按原始比例预留可见空间", () => {
+  assert.match(explorer, /const intrinsicStyle =/);
+  assert.match(explorer, /class="\$\{className\}\$\{isPriority \? "" : " is-deferred"\}"/);
+  assert.match(
+    explorer,
+    /width:min\(100%, \$\{dimensions\.width\}px\); aspect-ratio:\$\{dimensions\.width\}\/\$\{dimensions\.height\}/,
+  );
+  assert.match(explorer, /<div class="project-figure__media"\$\{intrinsicStyle\}/);
+  assert.match(css, /\.project-media\.is-deferred\s*\{[^}]*width:\s*100%;/s);
 });
 
 test("主要项目补齐不重复的成果媒体", () => {

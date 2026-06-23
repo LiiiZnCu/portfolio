@@ -1,3 +1,5 @@
+import { mediaDimensions } from "./media-dimensions.js";
+
 function resolveAssetPath(path = "") {
   if (!path || /^(?:[a-z]+:)?\/\//i.test(path) || path.startsWith("data:")) {
     return path;
@@ -54,20 +56,29 @@ function createTestResults(media, className) {
   `;
 }
 
-function createMedia(media, className = "") {
+function createMedia(media, className = "", isPriority = false) {
   if (media.type === "test-results") {
     return createTestResults(media, className);
+  }
+
+  const dimensionPath = media.type === "video" ? media.poster : media.src;
+  const dimensions = mediaDimensions[dimensionPath];
+
+  if (!dimensions) {
+    throw new Error(`缺少媒体尺寸：${dimensionPath}`);
   }
 
   if (media.type === "video") {
     return `
       <video
-        class="${className}"
+        class="${className}${isPriority ? "" : " is-deferred"}"
         controls
         playsinline
-        preload="metadata"
+        preload="none"
         poster="${resolveAssetPath(media.poster)}"
         aria-label="${media.alt}"
+        width="${dimensions.width}"
+        height="${dimensions.height}"
       >
         <source src="${resolveAssetPath(media.src)}" type="video/mp4" />
         你的浏览器暂不支持视频播放。
@@ -77,24 +88,33 @@ function createMedia(media, className = "") {
 
   return `
     <img
-      class="${className}"
+      class="${className}${isPriority ? "" : " is-deferred"}"
       src="${resolveAssetPath(media.src)}"
       alt="${media.alt}"
-      loading="eager"
-      decoding="async"
+      width="${dimensions.width}"
+      height="${dimensions.height}"
+      loading="${isPriority ? "eager" : "lazy"}"
+      fetchpriority="${isPriority ? "high" : "auto"}"
+      decoding="${isPriority ? "sync" : "async"}"
     />
   `;
 }
 
-function createFigure(media, className = "") {
+function createFigure(media, className = "", isPriority = false) {
+  const dimensionPath = media.type === "video" ? media.poster : media.src;
+  const dimensions = mediaDimensions[dimensionPath];
+  const intrinsicStyle =
+    !isPriority && dimensions && !media.deviceFrame
+      ? ` style="width:min(100%, ${dimensions.width}px); aspect-ratio:${dimensions.width}/${dimensions.height}"`
+      : "";
   const deviceFrame = media.deviceFrame
     ? ` data-device-frame="${media.deviceFrame}"`
     : "";
 
   return `
     <figure class="project-figure ${className}">
-      <div class="project-figure__media"${deviceFrame}>
-        ${createMedia(media, "project-media")}
+      <div class="project-figure__media"${intrinsicStyle}${deviceFrame}>
+        ${createMedia(media, "project-media", isPriority)}
       </div>
       <figcaption>${media.caption}</figcaption>
     </figure>
@@ -151,7 +171,7 @@ function createMediaViewer(mediaItems, activeMediaIndex) {
       : "";
 
   return `
-    ${createFigure(media, "project-lead__figure")}
+    ${createFigure(media, "project-lead__figure", true)}
     ${controls}
   `;
 }
