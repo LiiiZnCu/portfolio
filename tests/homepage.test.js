@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
+import { mediaDimensions } from "../src/media-dimensions.js";
 import { projects as projectData } from "../src/projects.js";
 
 const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
@@ -370,18 +371,21 @@ test("机械项目改为作品集风格的独立过程图", async () => {
   assert.doesNotMatch(projects, /控制理论与结构原理/);
 
   const processMedia = mechanical.sections.process.map(
-    (section) => section.media.src,
+    (section) =>
+      section.media.type === "video"
+        ? `${section.media.src}|${section.media.poster}`
+        : section.media.src,
   );
   assert.deepEqual(processMedia, [
     "/media/projects/mechanical/design-sketch.webp",
-    "/media/projects/mechanical/process-track.webp",
+    "/media/projects/mechanical/track-run.mp4|/media/projects/mechanical/track-run-poster.webp",
     "/media/projects/mechanical/robot-structure.webp",
     "/media/projects/mechanical/robot-on-stairs.webp",
   ]);
 
   const expectedSizes = new Map([
     ["/media/projects/mechanical/design-sketch.webp", { width: 2200, height: 1050 }],
-    ["/media/projects/mechanical/process-track.webp", { width: 2200, height: 980 }],
+    ["/media/projects/mechanical/track-run-poster.webp", { width: 960, height: 544 }],
     ["/media/projects/mechanical/robot-structure.webp", { width: 2200, height: 1100 }],
   ]);
 
@@ -389,6 +393,30 @@ test("机械项目改为作品集风格的独立过程图", async () => {
     const imageBuffer = await readFile(new URL(`../public${src}`, import.meta.url));
     assert.deepEqual(readWebpSize(imageBuffer), expectedSize);
   }
+});
+
+test("机械项目突出机械结构和运行验证", () => {
+  const mechanical = projectData.find((item) => item.id === "mechanical");
+
+  assert.match(mechanical.summary, /机械结构/);
+  assert.match(mechanical.sections.problem, /机械结构/);
+  assert.match(mechanical.sections.solution, /机构联动/);
+
+  const trackRun = mechanical.sections.process.find(
+    (section) => section.title === "用实测视频验证机构联动",
+  );
+  assert.equal(trackRun.media.type, "video");
+  assert.equal(trackRun.media.src, "/media/projects/mechanical/track-run.mp4");
+  assert.equal(trackRun.media.poster, "/media/projects/mechanical/track-run-poster.webp");
+
+  assert.deepEqual(mediaDimensions["/media/projects/mechanical/track-detail.webp"], {
+    width: 1706,
+    height: 1279,
+  });
+  assert.deepEqual(mediaDimensions["/media/projects/mechanical/gear-detail.webp"], {
+    width: 2299,
+    height: 1533,
+  });
 });
 
 test("机械项目按两个小项目分组展示", () => {
