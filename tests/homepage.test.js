@@ -261,9 +261,11 @@ test("首页使用更新后的竖版个人照片", async () => {
   assert.deepEqual(readWebpSize(portrait), { width: 900, height: 1350 });
 });
 
-test("首页使用简历中的公开联系方式，不公开手机号和出生日期", () => {
+test("首页使用简历中的公开联系方式，不公开出生日期", () => {
   assert.match(html, /3414887923@qq\.com/);
-  assert.doesNotMatch(html, /15812442807|2006\s*\/\s*01\s*\/\s*23/);
+  assert.match(html, /158\s*1244\s*2807/);
+  assert.match(html, /tel:15812442807/);
+  assert.doesNotMatch(html, /2006\s*\/\s*01\s*\/\s*23/);
 });
 
 test("视觉系统使用真白底和克制的东方暗红点缀", () => {
@@ -369,6 +371,18 @@ test("机械项目改为作品集风格的独立过程图", async () => {
 
   assert.equal(mechanical.title, "轨迹与攀爬");
   assert.doesNotMatch(projects, /控制理论与结构原理/);
+  assert.equal(mechanical.heroMedia.src, "/media/projects/mechanical.webp");
+  assert.match(mechanical.heroMedia.alt, /三叶轮爬楼机器人/);
+  assert.match(mechanical.heroMedia.caption, /真实台阶/);
+
+  const heroBuffer = await readFile(
+    new URL("../public/media/projects/mechanical.webp", import.meta.url),
+  );
+  assert.deepEqual(readWebpSize(heroBuffer), { width: 1600, height: 1100 });
+  assert.notEqual(
+    createHash("sha256").update(heroBuffer).digest("hex"),
+    "239d668f4811daf064e553622a24004e20afee254a9030e481676de7039e772a",
+  );
 
   const processMedia = mechanical.sections.process.map(
     (section) =>
@@ -438,6 +452,9 @@ test("机械项目按两个小项目分组展示", () => {
   assert.match(explorer, /function createSubprojectOverview/);
   assert.match(explorer, /project\.subprojects/);
   assert.match(css, /\.project-subprojects\s*\{/);
+  assert.match(css, /\.subproject-card__copy\s*\{[^}]*align-content:\s*start;/s);
+  assert.match(css, /\.subproject-card__copy ul\s*\{[^}]*width:\s*fit-content;/s);
+  assert.match(css, /\.subproject-card__copy ul\s*\{[^}]*align-items:\s*flex-start;/s);
 });
 
 test("SportLoop 展示从最新网页重新录制的真实交互动效", () => {

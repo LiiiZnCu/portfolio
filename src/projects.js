@@ -474,8 +474,8 @@ export const projects = [
     heroMedia: {
       type: "image",
       src: "/media/projects/mechanical.webp",
-      alt: "智能施工物流轨道与三叶轮爬楼机器人并列展示",
-      caption: "两个小课题：循环轨道负责路径与触发，三叶轮机器人负责传动与攀爬",
+      alt: "三叶轮爬楼机器人在台阶上进行攀爬测试",
+      caption: "真实台阶测试：三叶轮结构挂住台阶边缘并带动机身翻转",
       fit: "cover",
       ratio: "wide",
     },
