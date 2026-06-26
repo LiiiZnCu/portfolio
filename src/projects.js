@@ -336,7 +336,7 @@ export const projects = [
     facts: [
       { label: "SCOPE", value: "三维造型练习" },
       { label: "METHOD", value: "曲面 / 材质 / 灯光" },
-      { label: "OUTPUT", value: "两组场景渲染" },
+      { label: "OUTPUT", value: "建模 / 材质 / 场景渲染" },
     ],
     heroMedia: {
       type: "image",
@@ -365,9 +365,9 @@ export const projects = [
         },
       ],
       solution:
-        "最终使用两套光线：中性棚拍用于确认比例和轮廓，低角度环境光用于突出金属反射与岩石纹理。产品始终保持弧形主线，不依赖复杂装饰。",
+        "最终使用低角度环境光突出金属反射、深色握柄和岩石纹理。产品始终保持弧形主线，不依赖复杂装饰。",
       outcome:
-        "完成产品建模、材质调整与工作室/环境化两组渲染，形成从形态验证到氛围表达的完整练习。",
+        "完成产品建模、材质调整和两组场景渲染，形成从形态验证到氛围表达的完整练习。",
     },
     gallery: [],
   },
