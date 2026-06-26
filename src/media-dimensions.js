@@ -88,11 +88,11 @@ export const mediaDimensions = {
   "/media/projects/versa/party-scene.webp": { width: 2200, height: 1236 },
   "/media/projects/versa/product-closed.webp": { width: 2400, height: 1195 },
   "/media/projects/versa/product-open.webp": { width: 2400, height: 1195 },
-  "/media/projects/versa/research-profile.webp": { width: 2200, height: 3111 },
   "/media/projects/versa/rinse-clean.webp": { width: 2200, height: 1222 },
   "/media/projects/versa/simmer-flow.webp": { width: 1800, height: 1039 },
   "/media/projects/versa/storage-clean.webp": { width: 1280, height: 1280 },
   "/media/projects/versa/structure-system.webp": { width: 1014, height: 1077 },
+  "/media/projects/versa/user-profile.webp": { width: 1364, height: 776 },
   "/media/projects/versa/user-journey.webp": { width: 2200, height: 1238 },
   "/media/tarot-process-poster.png": { width: 1440, height: 1080 },
 };

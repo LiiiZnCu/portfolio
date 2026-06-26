@@ -186,15 +186,16 @@ export const projects = [
         "项目从独居饮食和空气炸锅升级需求出发。传统空气炸锅常见功能单一、烹饪过程不可见、参数依赖经验、清洁和收纳麻烦等问题。VERSA 的目标是减少一人食厨房里的多余器具，让用户从准备、烹饪、上桌到清洗都有连续体验。",
       process: [
         {
-          title: "从市场和用户定位切入",
+          title: "先明确独居轻食用户",
           text:
-            "桌面调研先确认空气炸锅从网红单品回到厨房工具的趋势，再把用户聚焦到重视健康、效率和品质的独居人群。项目没有直接从造型开始，而是先明确“少器具、看得见、好清洗、少判断”的使用目标。",
+            "用户定位聚焦在独居、重视健康饮食、希望烹饪简单干净的人群。她们的主要挫折不是不会做饭，而是油烟、清洗、口感不稳定和过程不可见带来的时间负担。",
           media: {
             type: "image",
-            src: "/media/projects/versa/research-profile.webp",
+            src: "/media/projects/versa/user-profile.webp",
             alt: "VERSA 空气炸锅用户画像与调研结论",
-            caption: "用户定位：从独居饮食习惯、购买关注点和使用痛点归纳机会点",
+            caption: "用户画像：年龄、居住状态、烹饪挫折、动机和需求",
             fit: "contain",
+            ratio: "wide",
           },
         },
         {
@@ -216,9 +217,9 @@ export const projects = [
             "产品拆解后，把热风循环、发热盘、玻璃内胆、控制旋钮和外壳分成独立模块。顶部负责空气炸，底部负责持续加热，透明玻璃内胆既承担可视窗口，也承担上桌和清洗容器。",
           media: {
             type: "image",
-            src: "/media/projects/versa/exploded-view.webp",
-            alt: "VERSA 产品结构爆炸渲染",
-            caption: "结构推导：热风模块、显示旋钮、玻璃内胆和底部加热组件分层",
+            src: "/media/projects/versa/structure-system.webp",
+            alt: "VERSA 产品爆炸图与结构标注",
+            caption: "结构标注：风机、发热管、炸篮、玻璃内胆和底部隔热件分开说明",
             fit: "contain",
             ratio: "wide",
           },
@@ -270,9 +271,9 @@ export const projects = [
       },
       {
         type: "image",
-        src: "/media/projects/versa/structure-system.webp",
-        alt: "VERSA 产品爆炸图与结构标注",
-        caption: "爆炸标注：显示、风机、发热管、炸篮、玻璃内胆和加热底座",
+        src: "/media/projects/versa/exploded-view.webp",
+        alt: "VERSA 产品结构爆炸渲染",
+        caption: "结构爆炸渲染：上盖、玻璃内胆、底座和加热组件分层展示",
       },
       {
         type: "image",
