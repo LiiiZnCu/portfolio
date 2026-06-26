@@ -346,7 +346,7 @@ test("过程媒体加载前按原始比例预留可见空间", () => {
 test("主要项目补齐不重复的成果媒体", () => {
   const expectedMediaCounts = new Map([
     ["SportLoop", 9],
-    ["VERSA", 5],
+    ["VERSA", 12],
     ["一袭戏服，一种人生", 4],
     ["轨迹与攀爬", 5],
   ]);
