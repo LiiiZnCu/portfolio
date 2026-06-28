@@ -238,14 +238,27 @@ export const projects = [
           },
         },
         {
-          title: "用同一个旋钮控制两种模式",
+          title: "空炸模式的旋钮流程",
           text:
-            "空炸和电煮共用旋钮与屏幕反馈，但流程分别处理。空炸模式重点是时间、温度、暂停和完成提醒；电煮模式重点是档位调节、持续加热和恢复运行，降低用户反复查参数的负担。",
+            "空炸模式围绕食材、时间和温度展开。用户先选择食材类别，再通过旋钮调整时间与温度，过程中可以暂停、恢复，并在完成时得到明确提醒。",
           media: {
             type: "image",
             src: "/media/projects/versa/air-fry-flow.webp",
             alt: "VERSA 空炸模式交互流程",
             caption: "空炸模式：选择食材、调整时间温度、暂停恢复和完成提示",
+            fit: "contain",
+            ratio: "wide",
+          },
+        },
+        {
+          title: "电煮模式的旋钮流程",
+          text:
+            "电煮模式不再强调温度曲线，而是让用户通过档位控制持续加热。流程单独处理调节档位、暂停加热、恢复运行和结束提醒，避免和空炸逻辑混在一起。",
+          media: {
+            type: "image",
+            src: "/media/projects/versa/simmer-flow.webp",
+            alt: "VERSA 电煮模式交互流程",
+            caption: "电煮模式：调节档位、暂停加热、恢复运行和结束提醒",
             fit: "contain",
             ratio: "wide",
           },
@@ -274,12 +287,6 @@ export const projects = [
         src: "/media/projects/versa/exploded-view.webp",
         alt: "VERSA 产品结构爆炸渲染",
         caption: "结构爆炸渲染：上盖、玻璃内胆、底座和加热组件分层展示",
-      },
-      {
-        type: "image",
-        src: "/media/projects/versa/simmer-flow.webp",
-        alt: "VERSA 电煮模式交互流程",
-        caption: "电煮模式：调节档位、暂停加热、恢复运行和结束提醒",
       },
       {
         type: "image",
