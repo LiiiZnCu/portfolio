@@ -194,13 +194,19 @@ test("项目使用可选择的展厅结构，不连续渲染八张长卡片", ()
   assert.match(explorer, /data-next-project/);
   assert.match(explorer, /data-media-previous/);
   assert.match(explorer, /data-media-next/);
+  assert.match(explorer, /project-tab__number/);
+  assert.match(explorer, /project-tab__body/);
   assert.match(
     css,
-    /\.project-tab\s*\{[^}]*padding:\s*0\.8rem 0\.9rem;/s,
+    /\.project-tab\s*\{[^}]*grid-template-columns:\s*3rem\s*minmax\(0,\s*1fr\)\s*auto;/s,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 1180px\)[\s\S]*?\.project-selector\s*\{[^}]*display:\s*flex;[\s\S]*?overflow-x:\s*auto;/s,
   );
   assert.doesNotMatch(
     css,
-    /\.project-tab:hover,\s*\.project-tab\.is-active\s*\{[^}]*padding-left:/s,
+    /grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)/,
   );
 });
 
@@ -346,7 +352,7 @@ test("过程媒体加载前按原始比例预留可见空间", () => {
 test("主要项目补齐不重复的成果媒体", () => {
   const expectedMediaCounts = new Map([
     ["SportLoop", 9],
-    ["VERSA", 11],
+    ["VERSA", 9],
     ["一袭戏服，一种人生", 4],
     ["轨迹与攀爬", 5],
   ]);

@@ -122,20 +122,25 @@ function createFigure(media, className = "", isPriority = false) {
 }
 
 function createProjectTab(project, index, activeIndex) {
+  const isActive = index === activeIndex;
+
   return `
     <button
-      class="project-tab${index === activeIndex ? " is-active" : ""}"
+      class="project-tab${isActive ? " is-active" : ""}"
       id="project-tab-${project.id}"
       type="button"
       role="tab"
-      aria-selected="${index === activeIndex}"
+      aria-selected="${isActive}"
       aria-controls="project-panel"
-      tabindex="${index === activeIndex ? "0" : "-1"}"
+      tabindex="${isActive ? "0" : "-1"}"
       data-project-index="${index}"
     >
-      <span>${project.number}</span>
-      <strong>${project.title}</strong>
-      <small>${project.category}</small>
+      <span class="project-tab__number">${project.number}</span>
+      <span class="project-tab__body">
+        <strong>${project.title}</strong>
+        <small>${project.category}</small>
+      </span>
+      <em>${isActive ? "当前" : ""}</em>
     </button>
   `;
 }

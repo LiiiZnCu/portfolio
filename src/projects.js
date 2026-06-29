@@ -177,9 +177,9 @@ export const projects = [
     ],
     heroMedia: {
       type: "image",
-      src: "/media/projects/versa/hero-scene.webp",
-      alt: "VERSA 多功能可视化智能空气炸锅厨房使用场景",
-      caption: "最终方案：一台机器覆盖空气炸、煮炖、煎烤和直接上桌",
+      src: "/media/projects/versa/product-closed.webp",
+      alt: "VERSA 多功能可视化智能空气炸锅整机渲染",
+      caption: "整机形态：空气炸模块与煮炖模块并列展示",
     },
     sections: {
       problem:
@@ -272,12 +272,6 @@ export const projects = [
     gallery: [
       {
         type: "image",
-        src: "/media/projects/versa/product-closed.webp",
-        alt: "VERSA 多功能可视化智能空气炸锅整机渲染",
-        caption: "整机形态：空气炸模块与煮炖模块并列展示",
-      },
-      {
-        type: "image",
         src: "/media/projects/versa/product-open.webp",
         alt: "VERSA 多功能可视化智能空气炸锅分体状态",
         caption: "分体结构：上盖、玻璃内胆、底座和炸篮分开使用",
@@ -296,15 +290,15 @@ export const projects = [
       },
       {
         type: "image",
-        src: "/media/projects/versa/countertop-simmer.webp",
-        alt: "VERSA 空气炸锅台面煮炖使用场景",
-        caption: "日常轻食：透明内胆让食材状态保持可见",
-      },
-      {
-        type: "image",
         src: "/media/projects/versa/party-scene.webp",
         alt: "VERSA 空气炸锅朋友聚餐使用场景",
         caption: "聚餐场景：一台设备完成加热、烤制和直接上桌",
+      },
+      {
+        type: "image",
+        src: "/media/projects/versa/hero-scene.webp",
+        alt: "VERSA 多功能可视化智能空气炸锅厨房使用场景",
+        caption: "最终场景：一台机器覆盖空气炸、煮炖、煎烤和直接上桌",
       },
       {
         type: "image",
@@ -319,15 +313,9 @@ export const projects = [
         caption: "清洁验证：内胆和炸篮可进入洗碗机，降低收拾负担",
       },
       {
-        type: "image",
-        src: "/media/projects/versa/storage-clean.webp",
-        alt: "VERSA 玻璃内胆收纳清洁示意图",
-        caption: "收纳闭环：烹饪、上桌、冷藏和清洗共用同一内胆",
-      },
-      {
         type: "video",
         src: "/media/projects/versa/process.mp4",
-        poster: "/media/projects/versa/hero-scene.webp",
+        poster: "/media/projects/versa/exploded-view.webp",
         alt: "VERSA 空气炸锅使用演示视频",
         caption: "产品动态展示：整机形态、旋钮与透明内胆",
       },

@@ -81,7 +81,7 @@ export const mediaDimensions = {
     width: 2200,
     height: 1418,
   },
-  "/media/projects/versa/exploded-view.webp": { width: 2200, height: 1476 },
+  "/media/projects/versa/exploded-view.webp": { width: 3840, height: 2879 },
   "/media/projects/versa/hero-scene.webp": { width: 2400, height: 1350 },
   "/media/projects/versa/interaction-flow.webp": { width: 1380, height: 610 },
   "/media/projects/versa/material-glass.webp": { width: 2200, height: 1089 },
