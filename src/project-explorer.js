@@ -160,7 +160,7 @@ function createProcessSection(section, index) {
 }
 
 function createSubprojectOverview(subprojects) {
-  if (!subprojects?.length) return "";
+  if (!subprojects || subprojects.length === 0) return "";
 
   return `
     <div class="project-subprojects" aria-label="两个小项目分组">
@@ -324,12 +324,20 @@ export function mountProjectExplorer({
     }
 
     function bindMediaControls() {
-      stage
-        .querySelector("[data-media-previous]")
-        ?.addEventListener("click", () => updateMedia(activeMediaIndex - 1));
-      stage
-        .querySelector("[data-media-next]")
-        ?.addEventListener("click", () => updateMedia(activeMediaIndex + 1));
+      const previousMediaButton = stage.querySelector("[data-media-previous]");
+      const nextMediaButton = stage.querySelector("[data-media-next]");
+
+      if (previousMediaButton) {
+        previousMediaButton.addEventListener("click", () =>
+          updateMedia(activeMediaIndex - 1),
+        );
+      }
+
+      if (nextMediaButton) {
+        nextMediaButton.addEventListener("click", () =>
+          updateMedia(activeMediaIndex + 1),
+        );
+      }
     }
 
     bindMediaControls();
@@ -364,9 +372,13 @@ export function mountProjectExplorer({
       }
 
       if (focusTab) {
-        selector
-          .querySelector(`[data-project-index="${activeIndex}"]`)
-          ?.focus();
+        const activeTab = selector.querySelector(
+          `[data-project-index="${activeIndex}"]`,
+        );
+
+        if (activeTab) {
+          activeTab.focus();
+        }
       }
     }, 160);
   }

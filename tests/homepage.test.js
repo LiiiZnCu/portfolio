@@ -13,6 +13,10 @@ const explorer = await readFile(
   new URL("../src/project-explorer.js", import.meta.url),
   "utf8",
 );
+const viteConfig = await readFile(
+  new URL("../vite.config.js", import.meta.url),
+  "utf8",
+);
 const sportloopCapture = await readFile(
   new URL("../scripts/recapture-sportloop.mjs", import.meta.url),
   "utf8",
@@ -432,6 +436,13 @@ test("部署在 GitHub Pages 子目录时使用站点基础路径加载媒体", 
   assert.doesNotMatch(html, /src="\/media\//);
   assert.match(explorer, /import\.meta\.env\.BASE_URL/);
   assert.match(explorer, /resolveAssetPath/);
+});
+
+test("项目渲染脚本兼容旧一点的 iPhone 和 iPad Safari", () => {
+  const runtimeSource = [app, explorer, projects].join("\n");
+
+  assert.doesNotMatch(runtimeSource, /\?\.|\?\?|\.(?:at)\(/);
+  assert.match(viteConfig, /target:\s*"es2019"/);
 });
 
 test("项目图片按原始比例自适应，不使用固定比例框或图片边框", () => {
