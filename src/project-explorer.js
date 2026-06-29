@@ -61,11 +61,10 @@ function createMedia(media, className = "", isPriority = false) {
     return createTestResults(media, className);
   }
 
-  const dimensionPath = media.type === "video" ? media.poster : media.src;
-  const dimensions = mediaDimensions[dimensionPath];
+  const dimensions = mediaDimensions[media.src];
 
   if (!dimensions) {
-    throw new Error(`缺少媒体尺寸：${dimensionPath}`);
+    throw new Error(`缺少媒体尺寸：${media.src}`);
   }
 
   if (media.type === "video") {
@@ -101,8 +100,7 @@ function createMedia(media, className = "", isPriority = false) {
 }
 
 function createFigure(media, className = "", isPriority = false) {
-  const dimensionPath = media.type === "video" ? media.poster : media.src;
-  const dimensions = mediaDimensions[dimensionPath];
+  const dimensions = mediaDimensions[media.src];
   const intrinsicStyle =
     !isPriority && dimensions && !media.deviceFrame
       ? ` style="width:min(100%, ${dimensions.width}px); aspect-ratio:${dimensions.width}/${dimensions.height}"`

@@ -58,6 +58,78 @@ function readAnimatedWebpMetadata(buffer) {
   return { durations, loop };
 }
 
+function readMp4VideoSize(buffer) {
+  const videoEntries = [];
+
+  function readBoxes(start = 0, end = buffer.length) {
+    const boxes = [];
+    let offset = start;
+
+    while (offset + 8 <= end) {
+      let size = buffer.readUInt32BE(offset);
+      const type = buffer.subarray(offset + 4, offset + 8).toString("ascii");
+      let headerSize = 8;
+
+      if (size === 1) {
+        size = Number(buffer.readBigUInt64BE(offset + 8));
+        headerSize = 16;
+      }
+
+      if (size === 0) {
+        size = end - offset;
+      }
+
+      if (size < headerSize || offset + size > end) break;
+
+      boxes.push({
+        type,
+        content: offset + headerSize,
+        end: offset + size,
+      });
+      offset += size;
+    }
+
+    return boxes;
+  }
+
+  function walk(start = 0, end = buffer.length) {
+    for (const box of readBoxes(start, end)) {
+      if (box.type === "stsd") {
+        const entryCount = buffer.readUInt32BE(box.content + 4);
+        let entryOffset = box.content + 8;
+
+        for (let index = 0; index < entryCount; index += 1) {
+          const entrySize = buffer.readUInt32BE(entryOffset);
+          const entryType = buffer
+            .subarray(entryOffset + 4, entryOffset + 8)
+            .toString("ascii");
+
+          if (["avc1", "hvc1", "hev1", "mp4v"].includes(entryType)) {
+            videoEntries.push({
+              width: buffer.readUInt16BE(entryOffset + 32),
+              height: buffer.readUInt16BE(entryOffset + 34),
+            });
+          }
+
+          entryOffset += entrySize;
+        }
+      }
+
+      if (["moov", "trak", "mdia", "minf", "stbl"].includes(box.type)) {
+        walk(box.content, box.end);
+      }
+    }
+  }
+
+  walk();
+
+  if (videoEntries.length !== 1) {
+    throw new Error(`无法确定 MP4 视频尺寸：${videoEntries.length} 条视频轨`);
+  }
+
+  return videoEntries[0];
+}
+
 test("首屏以个人身份为主标题，PORTFOLIO 只作为站点标识", () => {
   assert.match(html, /<h1[^>]*>\s*黎昕彤\s*<span>Li Xintong<\/span>\s*<\/h1>/);
   assert.doesNotMatch(html, /<h1[^>]*>\s*PORTFOLIO\s*<\/h1>/);
@@ -249,6 +321,69 @@ test("空气炸锅和戏曲塔罗都包含真实过程视频", () => {
       (media) => media?.type === "video",
     ),
   );
+});
+
+test("重点过程视频保留真实视频并控制体积", async () => {
+  const videoSources = projectData.flatMap((project) => [
+    ...project.gallery.filter((media) => media.type === "video").map((media) => media.src),
+    ...project.sections.process
+      .map((item) => item.media)
+      .filter((media) => media?.type === "video")
+      .map((media) => media.src),
+  ]);
+  const expectedVideos = [
+    {
+      src: "/media/tarot-process.mp4",
+      size: { width: 480, height: 360 },
+      maxBytes: 5 * 1024 * 1024,
+    },
+    {
+      src: "/media/projects/mechanical/track-run.mp4",
+      size: { width: 640, height: 364 },
+      maxBytes: 10 * 1024 * 1024,
+    },
+  ];
+
+  for (const video of expectedVideos) {
+    assert.ok(videoSources.includes(video.src), `${video.src} 未被项目引用`);
+    assert.deepEqual(mediaDimensions[video.src], video.size);
+
+    const buffer = await readFile(new URL(`../public${video.src}`, import.meta.url));
+    assert.deepEqual(readMp4VideoSize(buffer), video.size);
+    assert.ok(
+      buffer.byteLength <= video.maxBytes,
+      `${video.src} 仍然过大：${buffer.byteLength} bytes`,
+    );
+  }
+});
+
+test("所有会渲染的媒体都有真实尺寸记录", async () => {
+  const mediaItems = projectData.flatMap((project) => [
+    project.heroMedia,
+    ...(project.subprojects ?? []).map((item) => item.media),
+    ...project.gallery,
+    ...project.sections.process.map((item) => item.media),
+  ]);
+
+  for (const media of mediaItems.filter((item) => item?.src)) {
+    const expectedSize = mediaDimensions[media.src];
+    assert.ok(expectedSize, `${media.src} 缺少尺寸记录`);
+
+    const buffer = await readFile(new URL(`../public${media.src}`, import.meta.url));
+    if (media.type === "video") {
+      assert.deepEqual(readMp4VideoSize(buffer), expectedSize);
+    } else if (media.src.endsWith(".webp")) {
+      assert.deepEqual(readWebpSize(buffer), expectedSize);
+    }
+  }
+});
+
+test("视频使用自身尺寸预留空间，不借用封面尺寸", () => {
+  assert.doesNotMatch(
+    explorer,
+    /media\.type === "video"\s*\?\s*media\.poster\s*:\s*media\.src/,
+  );
+  assert.match(explorer, /mediaDimensions\[media\.src\]/);
 });
 
 test("个人照片和项目图片保持彩色", () => {

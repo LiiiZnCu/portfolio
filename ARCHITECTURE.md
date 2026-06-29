@@ -7,8 +7,8 @@
 - `src/project-explorer.js`：项目目录、深链接、手机菜单、项目章节渲染、成果媒体切换和前后项目切换。
 - `src/app.js`：初始化项目展厅、顶部导航和年份。
 - `src/styles.css`：个人简介首屏、编辑式三栏展厅、过程章节与响应式布局。
-- `public/media/projects/`：按项目整理、压缩的原始图片、个人照片和 VERSA 视频。
-- `public/media/tarot-process.mp4`：用户提供的塔罗制作过程视频。
+- `public/media/projects/`：按项目整理、压缩的原始图片、个人照片、项目视频。
+- `public/media/tarot-process.mp4`：压缩后的塔罗制作过程视频。
 - `public/media/tarot-process-poster.png`：从用户提供的视频提取的首帧封面。
 - `tests/homepage.test.js`：首页必需结构、项目真实性与基础可访问性检查。
 - `.github/workflows/deploy.yml`：GitHub Pages 自动部署。
@@ -27,3 +27,4 @@
 - 项目过程图从 PPT/PDF 中独立提取；不把完整展板或重复角度当作过程图库。
 - 人像与作品保持原始彩色；暗红只作为当前项目、编号和过程线索。
 - 公开展示邮箱和手机号，出生日期不进入网站。
+- 视频保留真实 MP4，并在 `mediaDimensions` 中登记视频自身宽高；缺尺寸直接报错，不借用封面图尺寸。
