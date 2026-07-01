@@ -733,10 +733,21 @@ svg {
 }
 
 .project-figure figcaption {
+  display: grid;
+  gap: 0.45rem;
   padding-top: 0.6rem;
   color: var(--ink-soft);
   font-size: 0.69rem;
   line-height: 1.5;
+}
+
+.project-figure__explanation {
+  max-width: 46rem;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  text-wrap: pretty;
 }
 
 .project-media-viewer {

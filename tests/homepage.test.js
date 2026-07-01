@@ -332,6 +332,49 @@ test("项目首屏在手机先介绍后媒体，iPad 保持双栏展示", () => 
   );
 });
 
+test("上方展示区包含过程图说明，并排除展板截图", async () => {
+  const { createShowcaseMediaItems } = await import("../src/project-explorer.js");
+
+  assert.equal(typeof createShowcaseMediaItems, "function");
+
+  for (const project of projectData) {
+    const showcaseMedia = createShowcaseMediaItems(project);
+    const showcaseSources = new Set(
+      showcaseMedia.map((media) => media.src).filter(Boolean),
+    );
+    const processMedia = project.sections.process
+      .map((section) => ({ section, media: section.media }))
+      .filter(({ media }) => media?.src);
+
+    for (const media of showcaseMedia.filter((item) => item.src)) {
+      assert.ok(media.caption?.trim(), `${media.src} 缺少图片说明`);
+      assert.doesNotMatch(
+        media.src,
+        /(?:^|\/)[^/]*(?:board|展板)[^/]*\.(?:webp|png|jpe?g)$/i,
+        `${media.src} 不应进入上方展示区`,
+      );
+    }
+
+    for (const { section, media } of processMedia) {
+      if (/(?:^|\/)[^/]*(?:board|展板)[^/]*\.(?:webp|png|jpe?g)$/i.test(media.src)) {
+        continue;
+      }
+
+      assert.ok(
+        showcaseSources.has(media.src),
+        `${project.title} 上方展示区缺少过程图：${media.src}`,
+      );
+
+      const showcaseItem = showcaseMedia.find((item) => item.src === media.src);
+      assert.equal(
+        showcaseItem.explanation,
+        section.text,
+        `${media.src} 没有使用过程文字解释图片`,
+      );
+    }
+  }
+});
+
 test("空气炸锅和戏曲塔罗都包含真实过程视频", () => {
   const versa = projectData.find((project) => project.title === "VERSA");
   const tarot = projectData.find(
@@ -561,16 +604,16 @@ test("阿根廷信息可视化用完整资料图讲清中场凝聚力", () => {
     })),
     [
       {
-        title: "先看三名中场的位置变化",
-        src: "/media/projects/argentina/midfield-position.webp",
-      },
-      {
         title: "用 2018 能力图找到旧结构的断点",
         src: "/media/projects/argentina/ability-2018.webp",
       },
       {
         title: "再用 2022 能力图说明补位关系",
         src: "/media/projects/argentina/ability-2022.webp",
+      },
+      {
+        title: "对照三名中场的位置变化",
+        src: "/media/projects/argentina/midfield-position.webp",
       },
       {
         title: "用跑动强度解释覆盖范围",
@@ -600,6 +643,29 @@ test("阿根廷信息可视化用完整资料图讲清中场凝聚力", () => {
     ],
   );
   assert.doesNotMatch(projectSources, /7，世界杯表现|club-worldcup-vertical/);
+});
+
+test("阿根廷上方展示区去掉第十和第十一张图", async () => {
+  const { createShowcaseMediaItems } = await import("../src/project-explorer.js");
+  const argentina = projectData.find((item) => item.id === "argentina-data");
+  const showcaseSources = createShowcaseMediaItems(argentina).map((media) => media.src);
+
+  assert.equal(showcaseSources.length, 9);
+  assert.doesNotMatch(showcaseSources.join("\n"), /team-structure|comparison-evidence/);
+});
+
+test("阿根廷过程图说明补足前因后果", () => {
+  const argentina = projectData.find((item) => item.id === "argentina-data");
+
+  assert.ok(argentina.sections.problem.length >= 100);
+  assert.match(argentina.sections.problem, /为什么|问题|原因|支撑/);
+
+  for (const section of argentina.sections.process) {
+    assert.ok(section.text.length >= 80, `${section.title} 解释过短`);
+  }
+
+  assert.match(argentina.sections.process[0].text, /2018|旧结构|梅西|所以/);
+  assert.match(argentina.sections.process.at(-1).text, /前面|最终|比赛|节奏/);
 });
 
 test("机械项目改为作品集风格的独立过程图", async () => {

@@ -108,15 +108,63 @@ function createFigure(media, className = "", isPriority = false) {
   const deviceFrame = media.deviceFrame
     ? ` data-device-frame="${media.deviceFrame}"`
     : "";
+  const explanation = media.explanation
+    ? `<p class="project-figure__explanation">${media.explanation}</p>`
+    : "";
 
   return `
     <figure class="project-figure ${className}">
       <div class="project-figure__media"${intrinsicStyle}${deviceFrame}>
         ${createMedia(media, "project-media", isPriority)}
       </div>
-      <figcaption>${media.caption}</figcaption>
+      <figcaption>
+        <span>${media.caption}</span>
+        ${explanation}
+      </figcaption>
     </figure>
   `;
+}
+
+function mediaKey(media) {
+  return media.src || `${media.type}:${media.caption || media.alt}`;
+}
+
+function isBoardScreenshot(media) {
+  return /(?:^|\/)[^/]*(?:board|展板)[^/]*\.(?:webp|png|jpe?g)$/i.test(
+    media.src || "",
+  );
+}
+
+function withExplanation(media, explanation) {
+  if (!media) return null;
+  if (!explanation) return media;
+  return { ...media, explanation };
+}
+
+export function createShowcaseMediaItems(project) {
+  const processMedia = project.sections.process.map((section) =>
+    withExplanation(section.media, section.text),
+  );
+  const subprojectMedia = (project.subprojects || []).map((subproject) =>
+    withExplanation(subproject.media, subproject.summary),
+  );
+  const candidates = [
+    withExplanation(project.heroMedia, project.summary),
+    ...processMedia,
+    ...subprojectMedia,
+    ...project.gallery,
+  ];
+  const seen = new Set();
+
+  return candidates.filter((media) => {
+    if (!media || media.showcase === false || isBoardScreenshot(media)) return false;
+
+    const key = mediaKey(media);
+    if (seen.has(key)) return false;
+
+    seen.add(key);
+    return true;
+  });
 }
 
 function createProjectTab(project, index, activeIndex) {
@@ -238,7 +286,7 @@ export function mountProjectExplorer({
     const project = projects[activeIndex];
     const previous = projects[(activeIndex - 1 + projects.length) % projects.length];
     const next = projects[(activeIndex + 1) % projects.length];
-    const mediaItems = [project.heroMedia, ...project.gallery];
+    const mediaItems = createShowcaseMediaItems(project);
 
     stage.innerHTML = `
       <article
