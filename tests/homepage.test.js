@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { mediaDimensions } from "../src/media-dimensions.js";
 import { projects as projectData } from "../src/projects.js";
@@ -8,6 +8,16 @@ import { projects as projectData } from "../src/projects.js";
 const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
 const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
 const projects = await readFile(new URL("../src/projects.js", import.meta.url), "utf8");
+const projectDirectory = new URL("../src/projects/", import.meta.url);
+const projectFiles = (await readdir(projectDirectory))
+  .filter((file) => file.endsWith(".js"))
+  .sort();
+const projectSources = [
+  projects,
+  ...(await Promise.all(
+    projectFiles.map((file) => readFile(new URL(file, projectDirectory), "utf8")),
+  )),
+].join("\n");
 const app = await readFile(new URL("../src/app.js", import.meta.url), "utf8");
 const explorer = await readFile(
   new URL("../src/project-explorer.js", import.meta.url),
@@ -188,17 +198,30 @@ test("项目区不显示多余的阅读说明", () => {
 });
 
 test("首页列出八个真实项目且不使用生成图片", () => {
-  assert.match(projects, /SportLoop/);
-  assert.match(projects, /VERSA/);
-  assert.match(projects, /弧刃/);
-  assert.match(projects, /一袭戏服，一种人生/);
-  assert.match(projects, /从凝视到亲吻/);
-  assert.match(projects, /轨迹与攀爬/);
-  assert.match(projects, /生长中的记忆/);
-  assert.match(projects, /英美松皮炎湿疹海报/);
-  assert.match(projects, /number: "08"/);
-  assert.doesNotMatch(html + projects, /generated_images|unsplash|placeholder/i);
+  assert.match(projectSources, /SportLoop/);
+  assert.match(projectSources, /VERSA/);
+  assert.match(projectSources, /弧刃/);
+  assert.match(projectSources, /一袭戏服，一种人生/);
+  assert.match(projectSources, /从凝视到亲吻/);
+  assert.match(projectSources, /轨迹与攀爬/);
+  assert.match(projectSources, /生长中的记忆/);
+  assert.match(projectSources, /英美松皮炎湿疹海报/);
+  assert.match(projectSources, /number: "08"/);
+  assert.doesNotMatch(html + projectSources, /generated_images|unsplash|placeholder/i);
   assert.doesNotMatch(html, /没有真实素材|无真实素材/);
+});
+
+test("项目数据按项目拆成独立文件，入口只负责汇总顺序", async () => {
+  const expectedFiles = projectData.map((project) => `${project.id}.js`).sort();
+
+  assert.deepEqual(projectFiles, expectedFiles);
+
+  for (const file of expectedFiles) {
+    assert.match(projects, new RegExp(`from "\\./projects/${file}"`));
+  }
+
+  assert.doesNotMatch(projects, /sections:\s*\{/);
+  assert.doesNotMatch(projects, /gallery:\s*\[/);
 });
 
 test("八个项目都使用项目目录中的多张真实素材", async () => {
@@ -253,7 +276,7 @@ test("八个项目都使用项目目录中的多张真实素材", async () => {
   }
 
   assert.doesNotMatch(
-    projects,
+    projectSources,
     /process-board\.webp|argentina\/board-(?:one|two)\.webp|aigc-posters\.webp/,
   );
 });
@@ -439,7 +462,7 @@ test("部署在 GitHub Pages 子目录时使用站点基础路径加载媒体", 
 });
 
 test("项目渲染脚本兼容旧一点的 iPhone 和 iPad Safari", () => {
-  const runtimeSource = [app, explorer, projects].join("\n");
+  const runtimeSource = [app, explorer, projectSources].join("\n");
 
   assert.doesNotMatch(runtimeSource, /\?\.|\?\?|\.(?:at)\(/);
   assert.match(viteConfig, /target:\s*"es2019"/);
@@ -500,6 +523,7 @@ test("主要项目补齐不重复的成果媒体", () => {
     ["SportLoop", 9],
     ["VERSA", 9],
     ["一袭戏服，一种人生", 4],
+    ["从凝视到亲吻", 4],
     ["轨迹与攀爬", 5],
   ]);
 
@@ -513,16 +537,76 @@ test("主要项目补齐不重复的成果媒体", () => {
   }
 
   assert.doesNotMatch(
-    projects,
+    projectSources,
     /src:\s*"\/media\/projects\/(?:sportloop|versa)\.webp"/,
   );
+});
+
+test("阿根廷信息可视化用完整资料图讲清中场凝聚力", () => {
+  const argentina = projectData.find((item) => item.id === "argentina-data");
+
+  assert.match(argentina.summary, /三名中场|梅西|凝聚力/);
+  assert.equal(
+    argentina.heroMedia.src,
+    "/media/projects/argentina/midfield-zone-impact.webp",
+  );
+  assert.match(argentina.sections.problem, /2018|2022|中场/);
+  assert.match(argentina.sections.solution, /站位|跑动|传球|俱乐部|比赛攻势/);
+  assert.match(argentina.sections.outcome, /夺回球权|防线|推进/);
+
+  assert.deepEqual(
+    argentina.sections.process.map((section) => ({
+      title: section.title,
+      src: section.media.src,
+    })),
+    [
+      {
+        title: "先看三名中场的位置变化",
+        src: "/media/projects/argentina/midfield-position.webp",
+      },
+      {
+        title: "用 2018 能力图找到旧结构的断点",
+        src: "/media/projects/argentina/ability-2018.webp",
+      },
+      {
+        title: "再用 2022 能力图说明补位关系",
+        src: "/media/projects/argentina/ability-2022.webp",
+      },
+      {
+        title: "用跑动强度解释覆盖范围",
+        src: "/media/projects/argentina/running-comparison.webp",
+      },
+      {
+        title: "把梅西的主要球源拆开",
+        src: "/media/projects/argentina/messi-pass-supply.webp",
+      },
+      {
+        title: "比较俱乐部与世界杯表现",
+        src: "/media/projects/argentina/club-worldcup-comparison.webp",
+      },
+      {
+        title: "把攻势节奏和传球次数叠合",
+        src: "/media/projects/argentina/match-momentum-passes.webp",
+      },
+    ],
+  );
+
+  assert.deepEqual(
+    argentina.gallery.map((media) => media.src),
+    [
+      "/media/projects/argentina/messi-attack-index.webp",
+      "/media/projects/argentina/team-structure.webp",
+      "/media/projects/argentina/comparison-evidence.webp",
+    ],
+  );
+  assert.doesNotMatch(projectSources, /7，世界杯表现|club-worldcup-vertical/);
 });
 
 test("机械项目改为作品集风格的独立过程图", async () => {
   const mechanical = projectData.find((item) => item.id === "mechanical");
 
   assert.equal(mechanical.title, "轨迹与攀爬");
-  assert.doesNotMatch(projects, /控制理论与结构原理/);
+  assert.doesNotMatch(projectSources, /控制理论与结构原理/);
   assert.equal(mechanical.heroMedia.src, "/media/projects/mechanical.webp");
   assert.match(mechanical.heroMedia.alt, /三叶轮爬楼机器人/);
   assert.match(mechanical.heroMedia.caption, /真实台阶/);

@@ -3,6 +3,18 @@ export const mediaDimensions = {
   "/media/projects/aigc/realistic-poster.webp": { width: 1024, height: 1536 },
   "/media/projects/arc-blade/rock-scene.webp": { width: 2000, height: 1123 },
   "/media/projects/arc-blade/studio.webp": { width: 2000, height: 1125 },
+  "/media/projects/argentina/ability-2018.webp": {
+    width: 1949,
+    height: 1938,
+  },
+  "/media/projects/argentina/ability-2022.webp": {
+    width: 1880,
+    height: 1880,
+  },
+  "/media/projects/argentina/club-worldcup-comparison.webp": {
+    width: 1017,
+    height: 1417,
+  },
   "/media/projects/argentina/comparison-evidence.webp": {
     width: 1370,
     height: 1040,
@@ -10,6 +22,30 @@ export const mediaDimensions = {
   "/media/projects/argentina/information-encoding.webp": {
     width: 1358,
     height: 900,
+  },
+  "/media/projects/argentina/match-momentum-passes.webp": {
+    width: 1958,
+    height: 1220,
+  },
+  "/media/projects/argentina/messi-attack-index.webp": {
+    width: 2234,
+    height: 2400,
+  },
+  "/media/projects/argentina/messi-pass-supply.webp": {
+    width: 1893,
+    height: 1748,
+  },
+  "/media/projects/argentina/midfield-position.webp": {
+    width: 1313,
+    height: 927,
+  },
+  "/media/projects/argentina/midfield-zone-impact.webp": {
+    width: 2400,
+    height: 1470,
+  },
+  "/media/projects/argentina/running-comparison.webp": {
+    width: 1161,
+    height: 975,
   },
   "/media/projects/argentina/system-path.webp": { width: 736, height: 1160 },
   "/media/projects/argentina/team-structure.webp": { width: 850, height: 820 },
