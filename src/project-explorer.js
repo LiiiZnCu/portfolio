@@ -247,6 +247,12 @@ function createSubprojectOverview(subprojects) {
   `;
 }
 
+function createMediaCount(activeMediaIndex, mediaCount) {
+  return `${String(activeMediaIndex + 1).padStart(2, "0")} / ${String(
+    mediaCount,
+  ).padStart(2, "0")}`;
+}
+
 function createMediaViewer(mediaItems, activeMediaIndex) {
   const media = mediaItems[activeMediaIndex];
   const controls =
@@ -254,18 +260,16 @@ function createMediaViewer(mediaItems, activeMediaIndex) {
       ? `
         <nav class="media-pagination" aria-label="当前项目媒体切换">
           <button type="button" data-media-previous aria-label="上一张媒体">←</button>
-          <span>
-            ${String(activeMediaIndex + 1).padStart(2, "0")}
-            /
-            ${String(mediaItems.length).padStart(2, "0")}
-          </span>
+          <span data-media-count>${createMediaCount(activeMediaIndex, mediaItems.length)}</span>
           <button type="button" data-media-next aria-label="下一张媒体">→</button>
         </nav>
       `
       : "";
 
   return `
-    ${createFigure(media, "project-lead__figure", true)}
+    <div class="project-media-frame" data-media-frame>
+      ${createFigure(media, "project-lead__figure", true)}
+    </div>
     ${controls}
   `;
 }
@@ -373,9 +377,18 @@ export function mountProjectExplorer({
 
     function updateMedia(index) {
       activeMediaIndex = (index + mediaItems.length) % mediaItems.length;
-      const viewer = stage.querySelector("[data-media-viewer]");
-      viewer.innerHTML = createMediaViewer(mediaItems, activeMediaIndex);
-      bindMediaControls();
+      const frame = stage.querySelector("[data-media-frame]");
+      const counter = stage.querySelector("[data-media-count]");
+
+      frame.innerHTML = createFigure(
+        mediaItems[activeMediaIndex],
+        "project-lead__figure",
+        true,
+      );
+
+      if (counter) {
+        counter.textContent = createMediaCount(activeMediaIndex, mediaItems.length);
+      }
     }
 
     function bindMediaControls() {

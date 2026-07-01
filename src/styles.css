@@ -542,13 +542,28 @@ svg {
 }
 
 .project-media-viewer {
+  display: grid;
   grid-column: 1;
   grid-row: 1;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: clamp(30rem, calc(100dvh - 8rem), 52rem);
   min-width: 0;
+  overflow-anchor: none;
 }
 
 .project-figure {
   margin: 0;
+}
+
+.project-media-frame {
+  display: grid;
+  min-height: 0;
+}
+
+.project-lead__figure {
+  display: grid;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr) auto;
 }
 
 .project-figure__media {
@@ -572,6 +587,15 @@ svg {
 
 .project-media.is-deferred {
   width: 100%;
+}
+
+.project-lead__figure .project-figure__media {
+  height: 100%;
+  overflow: hidden;
+}
+
+.project-lead__figure .project-media {
+  max-height: 100%;
 }
 
 .test-results {
@@ -748,10 +772,6 @@ svg {
   font-size: 0.78rem;
   line-height: 1.7;
   text-wrap: pretty;
-}
-
-.project-media-viewer {
-  min-width: 0;
 }
 
 .media-pagination {
@@ -1328,12 +1348,20 @@ svg {
     gap: 2rem;
   }
 
+  .project-media-viewer {
+    height: clamp(23rem, 66dvh, 38rem);
+  }
+
   .project-media {
     max-height: 62dvh;
   }
 
   .project-lead .project-media {
     max-height: 48dvh;
+  }
+
+  .project-lead__figure .project-media {
+    max-height: 100%;
   }
 
   .project-lead

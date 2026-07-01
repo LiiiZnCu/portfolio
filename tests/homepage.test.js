@@ -559,6 +559,42 @@ test("项目首图优先加载，其余媒体延后加载并预留准确尺寸",
   assert.doesNotMatch(explorer, /new Image\(\)|preloadRelatedMedia/);
 });
 
+test("上方媒体切换时容器高度稳定，不让页面跟着跳动", () => {
+  assert.match(
+    css,
+    /\.project-media-viewer\s*\{[^}]*height:\s*clamp\(/s,
+  );
+  assert.match(
+    css,
+    /\.project-media-viewer\s*\{[^}]*grid-template-rows:\s*minmax\(0,\s*1fr\)\s+auto;/s,
+  );
+  assert.match(
+    css,
+    /\.project-media-viewer\s*\{[^}]*overflow-anchor:\s*none;/s,
+  );
+  assert.match(
+    css,
+    /\.project-lead__figure\s*\{[^}]*grid-template-rows:\s*minmax\(0,\s*1fr\)\s+auto;/s,
+  );
+  assert.match(
+    css,
+    /\.project-lead__figure \.project-media\s*\{[^}]*max-height:\s*100%;/s,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 760px\)[\s\S]*?\.project-media-viewer\s*\{[^}]*height:\s*clamp\(/,
+  );
+});
+
+test("上方媒体切换只替换图片区，不重建整个查看器", () => {
+  assert.match(explorer, /data-media-frame/);
+  assert.match(explorer, /data-media-count/);
+  assert.match(explorer, /frame\.innerHTML\s*=\s*createFigure/);
+  assert.match(explorer, /counter\.textContent\s*=\s*createMediaCount/);
+  assert.doesNotMatch(explorer, /viewer\.innerHTML\s*=\s*createMediaViewer/);
+  assert.doesNotMatch(explorer, /updateMedia[\s\S]*?bindMediaControls\(\);[\s\S]*?function bindMediaControls/);
+});
+
 test("过程媒体加载前按原始比例预留可见空间", () => {
   assert.match(explorer, /const intrinsicStyle =/);
   assert.match(explorer, /class="\$\{className\}\$\{isPriority \? "" : " is-deferred"\}"/);
