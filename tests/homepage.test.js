@@ -332,7 +332,7 @@ test("项目首屏在手机先介绍后媒体，iPad 保持双栏展示", () => 
   );
 });
 
-test("上方展示区包含过程图说明，并排除展板截图", async () => {
+test("上方展示区只包含明确声明的过程图，并排除展板截图", async () => {
   const { createShowcaseMediaItems } = await import("../src/project-explorer.js");
 
   assert.equal(typeof createShowcaseMediaItems, "function");
@@ -360,17 +360,26 @@ test("上方展示区包含过程图说明，并排除展板截图", async () =>
         continue;
       }
 
-      assert.ok(
-        showcaseSources.has(media.src),
-        `${project.title} 上方展示区缺少过程图：${media.src}`,
-      );
+      const shouldShowcase = section.showcase === true || media.showcase === true;
 
-      const showcaseItem = showcaseMedia.find((item) => item.src === media.src);
-      assert.equal(
-        showcaseItem.explanation,
-        section.text,
-        `${media.src} 没有使用过程文字解释图片`,
-      );
+      if (shouldShowcase) {
+        assert.ok(
+          showcaseSources.has(media.src),
+          `${project.title} 上方展示区缺少过程图：${media.src}`,
+        );
+
+        const showcaseItem = showcaseMedia.find((item) => item.src === media.src);
+        assert.equal(
+          showcaseItem.explanation,
+          section.text,
+          `${media.src} 没有使用过程文字解释图片`,
+        );
+      } else {
+        assert.ok(
+          !showcaseSources.has(media.src),
+          `${project.title} 未声明的过程图不应进入上方展示区：${media.src}`,
+        );
+      }
     }
   }
 });

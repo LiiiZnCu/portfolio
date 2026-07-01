@@ -142,11 +142,18 @@ function withExplanation(media, explanation) {
 }
 
 export function createShowcaseMediaItems(project) {
-  const processMedia = project.sections.process.map((section) =>
-    withExplanation(section.media, section.text),
-  );
+  const processMedia = project.sections.process
+    .filter(
+      (section) =>
+        section.showcase === true ||
+        (section.media && section.media.showcase === true),
+    )
+    .map((section) => withExplanation(section.media, section.text));
   const subprojectMedia = (project.subprojects || []).map((subproject) =>
-    withExplanation(subproject.media, subproject.summary),
+    subproject.showcase === true ||
+    (subproject.media && subproject.media.showcase === true)
+      ? withExplanation(subproject.media, subproject.summary)
+      : null,
   );
   const candidates = [
     withExplanation(project.heroMedia, project.summary),
